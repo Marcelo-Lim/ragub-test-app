@@ -1,5 +1,5 @@
 import React from 'react';
-import PageRouter from './Router/Router';
+import PageRouter from './Router/Router.js';
 
 function App() {
   return (
