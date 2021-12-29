@@ -1,7 +1,7 @@
-import React,{forwardRef, useState, useEffect} from "react";
+import React,{forwardRef} from "react";
 import MaterialTable from "material-table";
 import { Container,Paper,Icon,Checkbox,Select,MenuItem } from '@material-ui/core';
-import moment from 'moment';
+
 
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
@@ -42,47 +42,38 @@ const tableIcons = {
   };
 
 
-const Home = () => {
-    const [data,setData] = useState([])
+const Appointments= () => {
 
     const columns=[
         {
-            title: "Patient Name", field:"firstName"
+            title: "Client Name", field:"name"
         },
         {
-            title: "Email", field:"email"
+            title: "Email", field:"attendanceCount"
         },
         {
-            title: "Contact Number", field: "contactNumber"
+            title: "Contact Number", field:"attendanceCount"
         },
         {
-            title: "Date", field: "dateAndTime", type: 'date'
+            title: "Time", field:"attendanceCount"
         },
         {
-            title: "Time", field: "dateAndTime", type: 'time'
-        },
-        {
-            title: "Status", field:"status"
+            title: "Date", field:"attendanceDate"
         }
         
 
     ]
-     
-    useEffect(()=>{
-        fetch("http://localhost:5000/appointment/appointmentsss")
-        .then(resp => resp.json())
-        .then(resp => setData(resp))
-    })
+
 
     return (
         <Container component ="main" maxWidth="md">
-            <h1>Home</h1>
+           
             <h2>Appointments</h2>
           
         <MaterialTable 
             icons={tableIcons}
              title="Pending Appoinments"
-             data={data}
+             //data={data}
              columns={columns}
             
          />
@@ -92,4 +83,4 @@ const Home = () => {
     )
 }
 
-export default Home;
+export default Appointments;
