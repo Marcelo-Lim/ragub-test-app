@@ -4,25 +4,28 @@ import { MTableBodyRow } from 'material-table'
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useDispatch } from 'react-redux';
+import {deleteDeduction} from '../../Components/Connections/Action/staffs'
 
-const CustomRow = (props,deduction) => {
+const CustomRow = (props) => {
     const dispatch = useDispatch();
    
- const [show,setShow]=useState(true)
+ const [show,setShow]=useState(true);
+
  
     const overlayStyle = { width: "100%", position: "absolute" }
     
-    return <Grid style={{ display: "contents" }} 
+    return (
+    <Grid style={{ display: "contents" }} 
     onMouseOver={()=>setShow(true)}
     onMouseLeave={()=>setShow(false)}
     >
         {show&&<Grid align="right" style={overlayStyle}>
 
             <Grid sm={2} align="center" style={{ background: "#ffffff" }}>
-            <IconButton title="Edit" onClick={()=>alert("Still Working")}>
+            <IconButton title="Edit" onClick={()=>alert(props.index)}>
              <EditIcon />
                </IconButton>
-                <IconButton title="Delete" onClick={()=>console.log('delete')}>
+               <IconButton title="Delete" onClick={()=>dispatch(deleteDeduction(props.data._id))}>
                     <DeleteIcon />
                 </IconButton>
             </Grid>
@@ -30,7 +33,11 @@ const CustomRow = (props,deduction) => {
         </Grid>}
        
         <MTableBodyRow {...props} />
-    </Grid>
 
+
+
+
+    </Grid>
+    )
 }
  export default CustomRow

@@ -1,15 +1,25 @@
-import {AUTH,UPDATE} from '../../../constant'
+import {AUTH,UPDATE,DELETE} from '../../../constant.js'
 import * as api from '../Api/index.js';
 
 
-export const newStaffData = (newDatas, router) => async (dispatch) =>{
+export const newStaffData = (newDatas, navigate) => async (dispatch) =>{
     try{
         const {data} = await api.newStaffData(newDatas);
 
         dispatch({type: AUTH,data});
         console.log('nadagdag ko na sez');
-        router.push('/home');
+        navigate('/home');
     }catch(error){
         console.log(error);
     }
 }
+export const deleteDeduction = (id) => async (dispatch) => {
+    try {
+      await api.deleteStaffData(id);
+     dispatch({ type: DELETE, payload: id });
+     alert("You successfully deleted a Staff Information");
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
