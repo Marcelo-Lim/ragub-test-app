@@ -9,7 +9,7 @@ import {deleteDeduction} from '../../Components/Connections/Action/staffs'
 const CustomRow = (props) => {
     const dispatch = useDispatch();
    
- const [show,setShow]=useState(true);
+ const [show,setShow]=useState(false);
 
  
     const overlayStyle = { width: "100%", position: "absolute" }

@@ -1,43 +1,31 @@
-import React from 'react';
-import * as FaIcons from 'react-icons/fa';
-import * as AiIcons from 'react-icons/ai';
-import * as IoIcons from 'react-icons/io';
-import * as RiIcons from 'react-icons/ri';
+import React from "react";
+import { NavItem,NavLink } from "reactstrap";
+import { makeStyles } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 
-export const DataItems =[
-    {
-    title: 'Home',
-    path: '/home',
-    icon: <AiIcons.AiFillHome />,
-    iconClosed: <RiIcons.RiArrowDownSFill />,
-    iconOpened: <RiIcons.RiArrowUpSFill />,
+const Item = ({ title, component, onClickListener }) => {
+    const classes = useStyles();
+    return (
+      <NavItem onClick={onClickListener}>
+        <NavLink
+          tag={Link}
+          className={["text-light", classes.title]}
+          to={component}
+        >
+          {title}
+        </NavLink>
+      </NavItem>
+    );
+  };
+  
+  const useStyles = makeStyles((theme) => ({
+    title: {
+      flexGrow: 1,
+      fontSize: 20,
+      fontFamily: "Pathway Gothic One",
+     
     },
-    {
-        title: 'Settings',
-        path: '/About',
-        icon: <AiIcons.AiFillHome />,
-    iconClosed: <RiIcons.RiArrowDownSFill />,
-    iconOpened: <RiIcons.RiArrowUpSFill />,
-        subNav: [
-            {
-              title: 'Users',
-              path: '/home',
-              icon: <IoIcons.IoIosPaper />,
-            },]
-    },
-    {
-        title: 'Settings',
-        path: '/About',
-        icon: <AiIcons.AiFillHome />,
-    iconClosed: <RiIcons.RiArrowDownSFill />,
-    iconOpened: <RiIcons.RiArrowUpSFill />,
-        subNav: [
-            {
-              title: 'Users',
-              path: '/home',
-              
-             icon: <IoIcons.IoIosPaper />,
-            },]
-    }
-]
+  }));
+  
+  export default Item;

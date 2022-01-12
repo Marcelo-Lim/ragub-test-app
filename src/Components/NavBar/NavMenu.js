@@ -1,71 +1,147 @@
-import React,{useState} from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { IconContext } from 'react-icons/lib';
-import * as FaIcons from 'react-icons/fa';
-import * as AiIcons from 'react-icons/ai';
-import { DataItems } from './DataItems';
-import SubMenu from '../NavBar/SubMenu'
+import React, { useState,useEffect } from "react";
+import { makeStyles, AppBar } from "@material-ui/core";
+import {
+  Button,
+  Collapse,
+  Container,
+  Navbar,
+  NavbarBrand,
+  NavbarToggler,
+} from "reactstrap";
+import { Link,useLocation } from "react-router-dom";
+import Item from "./DataItems";
+import "./NavBar.css";
 
-const Nav = styled.div`
-    background: #15171c;
-    height: 80px;
-    display: flex;
-    justify-content: flex-start;
-    alignt-items: center;
-    `;
-    const NavIcon = styled(Link)`
-    margin-left: 2rem;
-    font-size: 2rem;
-    height: 80px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-  `;
+const doctorMenu =[
+  {
+      title: "Home",
+      component: "/Home"
+  },
+  {
+      title: "Staff",
+      component: "/Staff"
+  },
+  {
+      title: "Doctor",
+      component: "/Doctor"
+  },
+  {
+      title: "Book Now",
+      component: "/"
+  },/*
+  {
+    title: "Monitoring",
+    component: "/Monitoring"
+  },*/
+]
+const menu =[
+    {
+        title: "Home",
+        component: "/Home"
+    },
+    {
+        title: "AboutUs",
+        component: "/Staff"
+    },
+    {
+        title: "ContactUs",
+        component: "/Doctor"
+    },
+    {
+        title: "Book Now",
+        component: "/"
+    },/*
+    {
+      title: "Monitoring",
+      component: "/Monitoring"
+    },*/
+]
+
+
+const NavMenu = () => {
+    const [user,setUser] = useState(JSON.parse(localStorage.getItem('profile')))
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedPage, setSelectedPage] = useState("Home");
+    const classes = useStyles();
+    
+
   
-  const SidebarNav = styled.nav`
-    background: #15171c;
-    width: 250px;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    position: fixed;
-    top: 0;
-    left: ${({ sidebar }) => (sidebar ? '0' : '-100%')};
-    transition: 350ms;
-    z-index: 10;
-  `;
   
-  const SidebarWrap = styled.div`
-    width: 100%;
-  `;
 
 
-const NavMenu = ()=>{
-    const [sidebar, setSidebar] = useState(false);
-    const showSidebar = () => setSidebar(!sidebar);
+    return (
+      <AppBar
+        elevation={0}
+        position='relative'
+        style={{ boxShadow: "none" }}
+      >
+        <Navbar
+          className='navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow w-100'
+          dark
+        >
+          <Container>
+
+            <NavbarBrand tag={Link} to='/'>
+              {/* <div className="navbarbrand">
+                <img src={IconClinic} alt='logo' height="50px" width="60px" />
+              </div> */}
+            </NavbarBrand>
+            {user?.result? (<>
+            <NavbarToggler
+              onClick={() => setIsOpen(!isOpen)}
+              className='mr-2 white '
+            />
+            <Collapse
+              className='d-sm-inline-flex flex-sm-row-reverse'
+              isOpen={isOpen}
+              navbar
+            >
+              <ul className='navbar-nav flex-grow mx-auto'>
+                {menu.map(({ title, component }, idx) => (
+                  <Item
+                    key={idx}
+                    title={title}
+                    component={component}
+                    onClickListener={() => {
+                      setSelectedPage(title);
+                    }}
+                  
+                  />
+
+                ))}
+              </ul>
+            </Collapse>
+
+            {/* <Button className={classes.buttonlogout} variant="contained"  onClick={logout}>Logout</Button> */}
+
+            </>):(<>
+                  <NavbarBrand tag={Link} to='/Authentication'>
+                    <div className="navbarbrand">
+                      <Button className={classes.buttonlogin} variant="contained">Sign In</Button>
+                    </div>
+                  </NavbarBrand></>
+            )}
+          </Container>
+        </Navbar>
+      </AppBar>
+    );
+  };
+  
+  const useStyles = makeStyles((theme) => ({
+    title: {
+      flexGrow: 1,
+      fontWeight: "bold",
+      fontSize: 25,
    
-
-    return(
-        <>
-        <IconContext.Provider value={{color: '#fff'}}>
-        <Nav>
-          <NavIcon to='#'>
-          <FaIcons.FaBars onClick={showSidebar} />
-          </NavIcon>
-        </Nav>
-        <SidebarNav sidebar={sidebar}>
-          <SidebarWrap>
-            <NavIcon to='#'>
-            <AiIcons.AiOutlineClose onClick={showSidebar} />
-            </NavIcon>
-            {DataItems.map((items, index)=>{
-              return <SubMenu item={items} key={index} />;
-            })}
-          </SidebarWrap>
-        </SidebarNav>
-        </IconContext.Provider>
-        </>
-    )
-}
-export default NavMenu
+      fontFamily: "Pathway Gothic One",
+    },
+    buttonlogout: {
+     
+      backgroundColor: "lightgray",
+    },
+    buttonlogin: {
+    
+      backgroundColor: "lightgray",
+    },
+  }));
+  export default NavMenu;

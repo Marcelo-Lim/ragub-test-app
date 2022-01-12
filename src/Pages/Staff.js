@@ -15,6 +15,7 @@ const initialState = {
                         email:'',
                         position:'',
                         StaffId: '',
+                        password:''
                        }
 
 const Staff = () =>{
@@ -37,7 +38,6 @@ const Staff = () =>{
         e.preventDefault();
          dispatch(newStaffData(form,navigate))
           console.log(form);
-          alert(form)
           setOpen(false);
        
     }
@@ -71,11 +71,13 @@ const Staff = () =>{
                             
                             <Input name="email" placeholder='Email' label='Email' handleChange={handleChange}/>
                             <Input name="position" placeholder='Position' label='Position' handleChange={handleChange}/>
+                            <Input name="password" placeholder='EmployeePassword' label='Password'/> 
                            
                             </Grid>
                             <Grid container justify="center">
                             <Button type="submit" variant="contained" color="primary">Add</Button>
                             <Button variant="contained" color="primary" onClick={handleClose}>Cancel</Button>
+                            
                             </Grid>
                             </form>
                         </Paper>

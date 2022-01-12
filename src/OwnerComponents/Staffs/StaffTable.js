@@ -5,7 +5,7 @@ import tableIcons from '../../Components/MaterialTable/MaterialTableIcons'
 import { Container,Paper,Icon,Checkbox,Select,MenuItem,Typography } from '@material-ui/core';
 import CustomRow from '.';
 import { useDispatch } from 'react-redux';
-import {deleteDeduction} from '../../Components/Connections/Action/staffs';
+
 
   
 
@@ -27,11 +27,7 @@ const StaffTable=()=> {
         },
         {
             title: "Contact Number", field:"contactNumber"
-        },
-       
-        
-
-    ]
+        },]
     useEffect(()=>{
         fetch("http://localhost:5000/staff/staffdatas")
         .then(resp => resp.json())
@@ -44,7 +40,7 @@ const StaffTable=()=> {
 
                 <Container component ="main" maxWidth="md">
             
-                    <Typography>{dataNums + numberId + 1}</Typography>
+              
             
                         <MaterialTable  
                             icons={tableIcons}

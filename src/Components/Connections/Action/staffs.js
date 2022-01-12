@@ -8,9 +8,11 @@ export const newStaffData = (newDatas, navigate) => async (dispatch) =>{
 
         dispatch({type: AUTH,data});
         console.log('nadagdag ko na sez');
-        navigate('/home');
+        // navigate('/home');
     }catch(error){
         console.log(error);
+        alert('Please check all the information');
+        
     }
 }
 export const deleteDeduction = (id) => async (dispatch) => {
