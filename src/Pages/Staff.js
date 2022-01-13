@@ -1,11 +1,13 @@
 import React,{useState,useEffect} from 'react';
 import StaffTable from '../OwnerComponents/Staffs/StaffTable'
 import { Container,Paper,Grid,TextField,Icon,Checkbox,Select,MenuItem ,Button,
-Dialog,DialogTitle, Typography,} from '@material-ui/core';
+Dialog,DialogTitle, Typography, makeStyles} from '@material-ui/core';
 import { useNavigate} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import Input from '../OwnerComponents/Staffs/StaffInput'
 import { newStaffData } from '../Components/Connections/Action/staffs';
+import "./Staff.css";
+import { COLORS } from '../Styles/colors';
 
 const initialState = {
                         firstName:'',
@@ -16,9 +18,10 @@ const initialState = {
                         position:'',
                         StaffId: '',
                         password:''
-                       }
+                    }
 
 const Staff = () =>{
+    const classes = useStyles();
     const [data,setData] = useState([])
     const [open,setOpen] = useState(false);
     const [staffId,setStaffId] = useState([]);
@@ -36,10 +39,9 @@ const Staff = () =>{
     }
     const handleSubmit =(e)=>{
         e.preventDefault();
-         dispatch(newStaffData(form,navigate))
-          console.log(form);
-          setOpen(false);
-       
+            dispatch(newStaffData(form,navigate))
+            console.log(form);
+            setOpen(false);
     }
     useEffect(()=>{
         fetch("http://localhost:5000/staff/staffdatas")
@@ -50,20 +52,23 @@ const Staff = () =>{
     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
     return(
         <div>
+        <div className="add-staff">
         <h1> Adding Staff </h1>
-        <Button onClick={handleClickOpen}>New Staff</Button>
+        <Button className={classes.newstaffbtn} onClick={handleClickOpen}>New Staff</Button>
+        </div>
 
         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-           <Container component ="main" maxWidth="lg"> 
+            <Container component ="main" maxWidth="lg"> 
                 <DialogTitle id="form-dialog-title">
-                Add Staff    <Grid container justify="center">
-                            <Button variant="contained" color="primary">X</Button>
+                    <Typography className={classes.addstaff}>    Add Staff    </Typography>
+                    <Grid container justify="center">
+                            
                             </Grid>
                 </DialogTitle>
-                        <Paper  elevation={3}>
+                        
                             <form onSubmit={handleSubmit}>
-                            <Grid container spacing={2}>
-                            <Typography>{numberId + dataNums +1}</Typography>
+                            <Grid container spacing={3} item xs={12}>
+                            <Typography className={classes.numberid}>Number ID: {numberId + dataNums +1}</Typography>
                             <Input name="lastName" placeholder='Last Name' label='Last Name' handleChange={handleChange} autoFocus/>
                             <Input name="firstName" placeholder='FirstName' label='First Name' handleChange={handleChange}/>
                             <Input name="suffix" placeholder='Suffix' label='Suffix' handleChange={handleChange}/>
@@ -72,15 +77,15 @@ const Staff = () =>{
                             <Input name="email" placeholder='Email' label='Email' handleChange={handleChange}/>
                             <Input name="position" placeholder='Position' label='Position' handleChange={handleChange}/>
                             <Input name="password" placeholder='EmployeePassword' label='Password'/> 
-                           
+
                             </Grid>
                             <Grid container justify="center">
-                            <Button type="submit" variant="contained" color="primary">Add</Button>
-                            <Button variant="contained" color="primary" onClick={handleClose}>Cancel</Button>
+                            <Button className={classes.addbtn} type="submit" variant="contained" color="primary">Add</Button>
+                            <Button className={classes.cancelbtn} variant="contained" color="primary" onClick={handleClose}>Cancel</Button>
                             
                             </Grid>
                             </form>
-                        </Paper>
+                        
 
 
                     </Container>
@@ -90,5 +95,56 @@ const Staff = () =>{
         <StaffTable/>
         </div>
     )
-}
+};
+
+const useStyles = makeStyles((theme) => ({
+
+    newstaffbtn: {
+        backgroundColor: COLORS.BLUE,
+        color: "white",
+        marginTop: "25px",
+        marginBottom: "25px",
+    },
+
+    addstaff: {
+        fontSize: "30px",
+        textAlign: "center",
+        marginBottom: "25px",
+        marginTop: "15px",
+    },
+
+    numberid: {
+        fontSize: "20px",
+        fontWeight: "bold",
+        marginTop: "15px",
+        marginLeft: "15px"
+    },
+
+    addbtn: {
+        backgroundColor: COLORS.BLUE,
+        color: "white",
+        width: "30%",
+        marginTop: "25px",
+        marginRight: "25px",
+        marginBottom: "25px",
+    },
+
+    cancelbtn: {
+        backgroundColor: COLORS.BLUE,
+        color: "white",
+        width: "30%",
+        marginTop: "25px",
+        marginRight: "25px",
+        marginBottom: "25px",
+    },
+
+    xbtn: {
+        backgroundColor: COLORS.BLUE,
+        color: "white",
+        width: "20%",
+        marginBottom: "15px"
+        
+    },
+
+}))
 export default Staff;

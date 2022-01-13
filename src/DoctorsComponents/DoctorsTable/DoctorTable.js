@@ -5,7 +5,7 @@ import {useDispatch} from 'react-redux';
 import { Container,Paper,Icon,Checkbox,Select,MenuItem,Typography } from '@material-ui/core';
 
 const DoctorTable = ()=>{
-  
+
             const columns=[
                 {
                     title: "Staff Name", field:"StaffId" 
@@ -22,18 +22,16 @@ const DoctorTable = ()=>{
         return(
             <Container component ="main" maxWidth="md">
             
-              
             
             <MaterialTable  
                 icons={tableIcons}
                 title="Doctor Information "
                // data={data}
-   
                 columns={columns}
-               
+
             />
 
-     </Container>
+            </Container>
         )   
 }
 export default DoctorTable
