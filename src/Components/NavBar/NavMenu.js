@@ -11,6 +11,7 @@ import {
 import { Link,useLocation } from "react-router-dom";
 import Item from "./DataItems";
 import "./NavBar.css";
+import { COLORS } from '../Styles/colors';
 
 const doctorMenu =[
   {
@@ -40,17 +41,24 @@ const menu =[
         component: "/Home"
     },
     {
-        title: "AboutUs",
+        title: "Staffs Info",
         component: "/Staff"
     },
     {
-        title: "ContactUs",
+        title: "Doctors Info",
         component: "/Doctor"
     },
     {
         title: "Book Now",
         component: "/"
-    },/*
+    },
+    
+    {
+        title: "Doctor",
+        component: "/DoctorHome"
+    },
+    
+    /*
     {
       title: "Monitoring",
       component: "/Monitoring"
@@ -65,15 +73,13 @@ const NavMenu = () => {
     const classes = useStyles();
     
 
-  
-  
 
 
     return (
       <AppBar
         elevation={0}
         position='relative'
-        style={{ boxShadow: "none" }}
+        style={{ boxShadow: "none", background: COLORS.MAROON, }}
       >
         <Navbar
           className='navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow w-100'
@@ -112,7 +118,7 @@ const NavMenu = () => {
               </ul>
             </Collapse>
 
-            {/* <Button className={classes.buttonlogout} variant="contained"  onClick={logout}>Logout</Button> */}
+            {/* { <Button className={classes.buttonlogout} variant="contained"  onClick={logout}>Logout</Button>} */}
 
             </>):(<>
                   <NavbarBrand tag={Link} to='/Authentication'>
@@ -132,11 +138,10 @@ const NavMenu = () => {
       flexGrow: 1,
       fontWeight: "bold",
       fontSize: 25,
-   
       fontFamily: "Pathway Gothic One",
     },
+
     buttonlogout: {
-     
       backgroundColor: "lightgray",
     },
     buttonlogin: {

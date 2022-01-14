@@ -3,7 +3,7 @@ import MaterialTable from "material-table";
 import { Container,Paper,Icon,Checkbox,Select,MenuItem } from '@material-ui/core';
 import tableIcons from '../Components/MaterialTable/MaterialTableIcons'
 import CustomRow from '../OwnerComponents/Staffs/Appointments/Appointments';
-
+import './Home.css';
 
 const Home = () => {
     const [data,setData] = useState([]);
@@ -38,7 +38,7 @@ const Home = () => {
         .then(resp => setData(resp))
     })
 
-  
+
     useEffect(()=>{
         setFilteredData(data.filter(d=>d.appointmentStatus === 'Pending' ));
         
@@ -46,23 +46,20 @@ const Home = () => {
 
 
     return (
-        <Container component ="main" maxWidth="md">
-            <h1>Home</h1>
-            <h2>Appointments</h2>
-          
+        <Container className="home-container" component ="main" maxWidth="md">
+            <h2 className="h2appointment">Appointments</h2>
+
         <MaterialTable 
             icons={tableIcons}
-             title="Pending Appoinments"
-             data={filteredData}
-             columns={columns}
-             components={{
+                title="Pending Appoinments"
+                data={filteredData}
+                columns={columns}
+                components={{
                 Row: props => <CustomRow {...props}/>
-              }}
+                }}
             
-         />
-      
-         </Container>
-       
+        />
+        </Container>
     )
 }
 
