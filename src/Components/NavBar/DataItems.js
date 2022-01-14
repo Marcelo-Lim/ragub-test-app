@@ -3,6 +3,7 @@ import { NavItem,NavLink } from "reactstrap";
 import { makeStyles } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
+
 const Item = ({ title, component, onClickListener }) => {
     const classes = useStyles();
     return (
@@ -23,7 +24,7 @@ const Item = ({ title, component, onClickListener }) => {
       flexGrow: 1,
       fontSize: 20,
       fontFamily: "Pathway Gothic One",
-      color: "black",
+     
     },
   }));
   
