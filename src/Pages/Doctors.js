@@ -24,7 +24,30 @@ const Doctor = ()=>{
         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <Container component ="main" maxWidth="lg"> 
 
-        <DialogTitle id="form-dialog-title"> Doctor </DialogTitle>
+        <DialogTitle id="form-dialog-title"> 
+        <Typography> Doctor </Typography>  
+        </DialogTitle>
+
+                        {/* <form onSubmit={handleSubmit}>
+                            <Grid container spacing={3} item xs={12}>
+                                <Typography className={classes.numberid}>Number ID: {numberId + dataNums +1}</Typography>
+                                <Input name="lastName" placeholder='Last Name' label='Last Name' handleChange={handleChange} autoFocus/>
+                                <Input name="firstName" placeholder='FirstName' label='First Name' handleChange={handleChange}/>
+                                <Input name="suffix" placeholder='Suffix' label='Suffix' handleChange={handleChange}/>
+                                <Input name="contactNumber" placeholder='Contact Number' label='Contact Number' handleChange={handleChange}/>
+                            
+                                <Input name="email" placeholder='Email' label='Email' handleChange={handleChange}/>
+                                <Input name="position" placeholder='Position' label='Position' handleChange={handleChange}/>
+                                <Input name="password" placeholder='EmployeePassword' label='Password'/> 
+
+                            </Grid>
+                            <Grid container justify="center">
+                                <Button className={classes.addbtn} type="submit" variant="contained" color="primary">Add</Button>
+                                <Button className={classes.cancelbtn} variant="contained" color="primary" onClick={handleClose}>Cancel</Button>
+                            
+                            </Grid>
+                        </form> */}
+
 
         </Container>
         </Dialog>

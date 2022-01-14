@@ -41,11 +41,11 @@ const menu =[
         component: "/Home"
     },
     {
-        title: "AboutUs",
+        title: "Staffs Info",
         component: "/Staff"
     },
     {
-        title: "ContactUs",
+        title: "Doctors Info",
         component: "/Doctor"
     },
     {
