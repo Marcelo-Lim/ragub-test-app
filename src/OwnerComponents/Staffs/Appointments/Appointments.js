@@ -10,10 +10,13 @@ const CustomRow = (props) => {
     const [appointmentStatus, setAppointmentStatus]=useState({ appointmentStatus:'Approved'})
     const dispatch = useDispatch();
    
- const [show,setShow]=useState(false);
+ const [show,setShow]=useState(true);
  
  
     const overlayStyle = { width: "100%", position: "absolute" }
+
+
+
     
     return (
     <Grid style={{ display: "contents" }} 
@@ -22,11 +25,11 @@ const CustomRow = (props) => {
     >
         {show&&<Grid align="right" style={overlayStyle}>
 
-            <Grid sm={2} align="center" style={{ background: "#ffffff" }}>
-            <IconButton title="Edit" onClick={()=>{alert(props.index)}}>
+             <Grid sm={2} align="center" style={{ background: "#ffffff" }}>
+            <IconButton title="Edit" onClick={()=>dispatch(cancelAppointment(props.data._id,{...appointmentStatus})) && props.handleEmailSubmit(props.data)}>
              <EditIcon />
                </IconButton>
-               <IconButton title="Delete" onClick={()=> dispatch(cancelAppointment(props.data._id,{...appointmentStatus}))}>
+               <IconButton title="Delete" onClick={()=>console.log(props.index)}>
                     <DeleteIcon />
                 </IconButton>
             </Grid>

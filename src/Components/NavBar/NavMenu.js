@@ -22,10 +22,10 @@ const doctorMenu =[
       title: "Home",
       component: "/DoctorHome"
   },
-  {
-    title: "Profile",
-    component: "/profile"
-}, 
+//   {
+//     title: "Profile",
+//     component: "/profile"
+// }, 
 ]
 const menu =[
     {
