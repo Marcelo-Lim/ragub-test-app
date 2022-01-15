@@ -28,7 +28,7 @@ useEffect(function () {
                         <InputBase
                             className={classes.input}
                             sx={{ ml: 1, flex: 1 }}
-                            placeholder="...Search Patient"
+                            placeholder="..Search Patient"
                             inputProps={{ 'aria-label': 'search google maps' }}
                             onChange={(event)=>{
                                 setSearchData(event.target.value);
@@ -91,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: "50px",
         marginRight: "50px",
         textAlign: "center",
-        backgroundColor: COLORS.GREY,
+        backgroundColor: COLORS.WHITE,
     },
 
     container: {
@@ -99,12 +99,16 @@ const useStyles = makeStyles((theme) => ({
     },
 
     input: {
+        border: "1px solid",
         backgroundColor: COLORS.WHITE,
-        marginBottom: "200px"
+        marginBottom: "50px",
+        
     },
 
     icon: {
-        color: COLORS.BLACK
+        
+        color: COLORS.BLACK,
+        width: "100%",
     },
 
 }))

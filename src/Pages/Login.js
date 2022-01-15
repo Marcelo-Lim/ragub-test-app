@@ -40,7 +40,7 @@ return(
                 <Grid container spacing={4} direction="column">
                     <Grid item>
                        <TextField className={classes.txtfield} name="StaffId"  label="ID Number" 
-                        placeholder='Enter your Last Name'  autoFocus
+                        placeholder='Enter your ID Number'  autoFocus
                         value={form.StaffId} onChange={handleChange} 
                         variant="outlined" />
                     </Grid>
