@@ -50,7 +50,7 @@ const Doctor = ()=>{
         <Container component ="main" maxWidth="lg"> 
 
         <DialogTitle id="form-dialog-title"> 
-        <Typography> Doctor </Typography>  
+        <Typography className={classes.typodoctor}> Doctor </Typography>  
         </DialogTitle>
 
                         <form >
@@ -94,6 +94,39 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: "35px",
         backgroundColor: COLORS.BLUE,
         color: "white",
+    },
+
+    addbtn: {
+        backgroundColor: COLORS.BLUE,
+        color: "white",
+        width: "30%",
+        marginTop: "25px",
+        marginRight: "25px",
+        marginBottom: "25px",
+    },
+
+    cancelbtn: {
+        backgroundColor: COLORS.BLUE,
+        color: "white",
+        width: "30%",
+        marginTop: "25px",
+        marginRight: "25px",
+        marginBottom: "25px",
+    },
+
+    numberid: {
+        fontSize: "20px",
+        fontWeight: "bold",
+        marginTop: "15px",
+        marginLeft: "15px"
+    },
+
+    typodoctor: {
+        
+            fontSize: "30px",
+            textAlign: "center",
+            marginBottom: "25px",
+            marginTop: "15px",
     }
 
 }));

@@ -15,6 +15,7 @@ import "./NavBar.css";
 import * as actionType from '../../constant'
 import { COLORS } from '../Styles/colors';
 import decode from 'jwt-decode';
+import IconClinic from "../../Assets/images/sdmc-no-border.png";
 
 const doctorMenu =[
   {
@@ -96,12 +97,12 @@ const NavMenu = () => {
           className='navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow w-100'
           dark
         >
-          <Container>
+          
 
             <NavbarBrand tag={Link} to='/'>
-              {/* <div className="navbarbrand">
-                <img src={IconClinic} alt='logo' height="50px" width="60px" />
-              </div> */}
+              <div className="navbarbrand">
+                <img src={IconClinic} alt='logo' height="60px" width="60px" />
+              </div>
             </NavbarBrand>
             {user?.result? (<>
              
@@ -156,7 +157,7 @@ const NavMenu = () => {
                     </div>
                   </NavbarBrand></>
           )} 
-          </Container>
+          
         </Navbar>
       </AppBar>
     );
@@ -167,15 +168,19 @@ const NavMenu = () => {
       flexGrow: 1,
       fontWeight: "bold",
       fontSize: 25,
+      color: COLORS.WHITE,
       fontFamily: "Pathway Gothic One",
     },
 
     buttonlogout: {
       backgroundColor: "lightgray",
+      color: COLORS.BLACK,
+      
     },
     buttonlogin: {
-    
+      color: COLORS.BLACK,
       backgroundColor: "lightgray",
+      
     },
   }));
   export default NavMenu;
