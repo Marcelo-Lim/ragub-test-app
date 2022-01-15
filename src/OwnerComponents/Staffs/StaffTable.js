@@ -17,13 +17,16 @@ const StaffTable=()=> {
 
     const columns=[
         {
-            title: "Staff Name", field:"StaffId" 
+            title: "ID Number", field:"StaffId" 
         },
         {
             title: "Staff Last Name", field:"lastName" 
         },
         {
-            title: "Email", field:"email"
+            title: "Staff First Name", field:"firstName" 
+        },
+        {
+            title: "Position", field:"position"
         },
         {
             title: "Contact Number", field:"contactNumber"

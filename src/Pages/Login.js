@@ -1,30 +1,56 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { Container,Paper,Grid,TextField,Button,Typography, makeStyles,} from '@material-ui/core';
 import { COLORS } from '../Styles/colors';
+import { signInStaff } from '../Components/Connections/Action/staffs';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { AUTH } from '../constant';
 
 const Logins = ()=>{
-
+    const [user,setUser] = useState(JSON.parse(localStorage.getItem('profile')))
+    const [form,setForm]=useState({ StaffId:'', password: ''})
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const classes = useStyles();
+
+    const handleChange = e => {
+        const {name, value} = e.target
+        setForm({
+            ...form,
+            [name]: value
+        })
+        // setErrors(validateInfo(values));
+    };
+
+    const handleSubmit =(e) =>{
+        e.preventDefault();
+        console.log(form);
+        dispatch(signInStaff(form))
+        {(user?.result.level !== 'Staff' ? navigate('/DoctorHome') : navigate('/home') )}
+    }
 
 return(
         <Container component="main" maxWidth="sm">
             <Paper className={classes.paper} elevation={3}>
                 <Typography className={classes.logintxt} >Log in</Typography>
 
-            <form className={classes.form}>
+            <form className={classes.form} onSubmit={handleSubmit}>
                 <Grid container spacing={4} direction="column">
                     <Grid item>
-                        <TextField className={classes.txtfield} name="email" label="Email" type="email" placeholder="Enter your email"
-                        variant="outlined"></TextField>
+                       <TextField className={classes.txtfield} name="StaffId" label="ID Number" 
+                        placeholder='Enter your Last Name'  autoFocus
+                        value={form.StaffId} onChange={handleChange} 
+                        variant="outlined" />
                     </Grid>
                     <Grid item>
-                        <TextField className={classes.txtfield} name="password" label="Password" type="password" placeholder="Enter your password"
-                        variant="outlined"/>
+                    <TextField  className={classes.txtfield} name="password" label="Password" type="password" placeholder='Enter your password'
+                    value={form.password} onChange={handleChange} 
+                    fullWidth  variant="outlined"  />
                     </Grid>
                 </Grid>
-
+                <Button type='submit'className={classes.submit}> Log in</Button>
             </form>
-            <Button className={classes.submit}> Log in</Button>
+           
             </Paper>
         </Container>
 )
