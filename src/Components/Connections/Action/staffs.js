@@ -24,13 +24,13 @@ export const deleteDeduction = (id) => async (dispatch) => {
       console.log(error);
     }
   };
-
-  export const signInStaff = (formData) => async (dispatch) => {
+  
+  export const signInStaff = (formData,navigate) => async (dispatch) => {
     try {
       const { data } = await api.signInStaff(formData);
   
       dispatch({ type: AUTH, data });
-     
+     navigate('/')
       
     } catch (error) {
       console.log(error);

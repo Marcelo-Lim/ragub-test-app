@@ -25,16 +25,10 @@ const Logins = ()=>{
     const handleSubmit =(e) =>{
         e.preventDefault();
         console.log(form);
-        dispatch(signInStaff(form))
+        dispatch(signInStaff(form,navigate))
         
 
-        if(user?.result.level === 'Staff'){
-            //dispatch(signInStaff(form));
-            navigate('/home')
-        }
-        else{
-            navigate('/DoctorHome')
-        }
+       
     }
 
 return(

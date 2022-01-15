@@ -7,6 +7,7 @@ import {useDispatch} from 'react-redux';
 import { COLORS } from '../Styles/colors';
 import Input from '../OwnerComponents/Staffs/StaffInput'
 import './Doctors.css';
+import { newStaffData } from '../Components/Connections/Action/staffs';
 
 const Doctor = ()=>{
     const classes = useStyles();
@@ -26,6 +27,8 @@ const Doctor = ()=>{
         level: '' 
 
     }
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
     useEffect(()=>{
         fetch("http://localhost:5000/staff/staffdatas")
         .then(resp => resp.json())
@@ -40,7 +43,14 @@ const Doctor = ()=>{
     const handleClickOpen =()=>{
         setOpen(true);
         {console.log(data.length)}
-        
+         
+    }
+    const handleSubmit =(e)=>{
+        e.preventDefault();
+        setForm(form.StaffId=(numberId + dataNums +1).toString(),form.level='Doctor');
+          dispatch(newStaffData(form,navigate))
+            console.log(form);
+            setOpen(false);
     }
     return(
         <div className="container-doctor">
@@ -53,17 +63,18 @@ const Doctor = ()=>{
         <Typography> Doctor </Typography>  
         </DialogTitle>
 
-                        <form >
+                        <form onSubmit={handleSubmit}>
                             <Grid container spacing={3} item xs={12}>
                                 <Typography className={classes.numberid}>Number ID: {numberId + dataNums +1}</Typography>
                                 <Input name="lastName" placeholder='Last Name' label='Last Name' handleChange={handleChange} autoFocus/>
                                 <Input name="firstName" placeholder='FirstName' label='First Name' handleChange={handleChange}/>
+                                <Input name="middleName" placeholder='MiddleName' label='Middle Name' handleChange={handleChange}/>
                                 <Input name="suffix" placeholder='Suffix' label='Suffix' handleChange={handleChange}/>
                                 <Input name="contactNumber" placeholder='Contact Number' label='Contact Number' handleChange={handleChange}/>
                             
                                 <Input name="email" placeholder='Email' label='Email' handleChange={handleChange}/>
-                                <Input name="position" placeholder='Position' label='Position' handleChange={handleChange}/>
-                                <Input name="password" placeholder='EmployeePassword' label='Password'/> 
+                                <Input name="position" placeholder='Specialization' label='Specialization' handleChange={handleChange}/>
+                                <Input name="password" placeholder='EmployeePassword' handleChange={handleChange} label='Password'/> 
 
                             </Grid>
                             <Grid container justify="center">

@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 
 const StaffTable=()=> {
     const [data,setData] = useState([])
+    const [filteredData,setFilteredData]=useState(data)
     const dispatch = useDispatch();
     const numberId = 10000000;
     const dataNums = data.length;
@@ -36,6 +37,10 @@ const StaffTable=()=> {
         .then(resp => resp.json())
         .then(resp => setData(resp))
     })
+    useEffect(()=>{
+        setFilteredData(data.filter(d=>d.level === 'Staff' ));
+        
+    },[data])
      const handleDelete = (_id) =>{
          alert(_id);
      }
@@ -48,7 +53,7 @@ const StaffTable=()=> {
                         <MaterialTable  
                             icons={tableIcons}
                             title="Staff Information "
-                            data={data}
+                            data={filteredData}
                
                             columns={columns}
                             components={{
