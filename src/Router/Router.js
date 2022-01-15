@@ -25,7 +25,7 @@ const PageRouter = () => {
                 {/* <Login/> */}
                
                 <Route exact path='/login' element={<Login/>}/>
-                <Route exact path='/' element={(user?.result ? (user?.result.level !== 'Staff' ? <DoctorHome/>:<ProfileDoctor/>): <Login/>)}/>
+                <Route exact path='/' element={(user?.result ? (user?.result.level !== 'Staff' ? <DoctorHome/>:<Home/>): <Login/>)}/>
                 
                 <Route exact path='/Staff' element={<Staff/>}/>
                 <Route exact path='/Doctor' element={<Doctor/>}/>

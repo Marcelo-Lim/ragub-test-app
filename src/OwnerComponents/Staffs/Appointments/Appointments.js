@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import emailjs from 'emailjs-com'
 import { Grid, IconButton } from '@material-ui/core'
 import { MTableBodyRow } from 'material-table'
 import EditIcon from '@material-ui/icons/Edit';
@@ -10,7 +11,7 @@ const CustomRow = (props) => {
     const dispatch = useDispatch();
    
  const [show,setShow]=useState(false);
-
+ 
  
     const overlayStyle = { width: "100%", position: "absolute" }
     
@@ -22,7 +23,7 @@ const CustomRow = (props) => {
         {show&&<Grid align="right" style={overlayStyle}>
 
             <Grid sm={2} align="center" style={{ background: "#ffffff" }}>
-            <IconButton title="Edit" onClick={()=>alert(props.index)}>
+            <IconButton title="Edit" onClick={()=>{alert(props.index)}}>
              <EditIcon />
                </IconButton>
                <IconButton title="Delete" onClick={()=> dispatch(cancelAppointment(props.data._id,{...appointmentStatus}))}>

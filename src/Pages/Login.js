@@ -8,7 +8,7 @@ import { AUTH } from '../constant';
 
 const Logins = ()=>{
     const [user,setUser] = useState(JSON.parse(localStorage.getItem('profile')))
-    const [form,setForm]=useState({ StaffId:'', password: ''})
+    const [form,setForm]=useState({ StaffId:parseInt(''), password: ''})
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const classes = useStyles();
@@ -26,7 +26,15 @@ const Logins = ()=>{
         e.preventDefault();
         console.log(form);
         dispatch(signInStaff(form))
-        {(user?.result.level !== 'Staff' ? navigate('/DoctorHome') : navigate('/home') )}
+        
+
+        if(user?.result.level === 'Staff'){
+            //dispatch(signInStaff(form));
+            navigate('/home')
+        }
+        else{
+            navigate('/DoctorHome')
+        }
     }
 
 return(
@@ -37,7 +45,7 @@ return(
             <form className={classes.form} onSubmit={handleSubmit}>
                 <Grid container spacing={4} direction="column">
                     <Grid item>
-                       <TextField className={classes.txtfield} name="StaffId" label="ID Number" 
+                       <TextField className={classes.txtfield} name="StaffId" type="Numbers" label="ID Number" 
                         placeholder='Enter your Last Name'  autoFocus
                         value={form.StaffId} onChange={handleChange} 
                         variant="outlined" />

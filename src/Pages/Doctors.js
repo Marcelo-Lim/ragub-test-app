@@ -1,20 +1,45 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import DoctorTable from '../DoctorsComponents/DoctorsTable/DoctorTable'
 import { Container,Paper,Grid,TextField,Icon,Checkbox,Select,MenuItem ,Button,
 Dialog,DialogTitle, Typography, makeStyles,} from '@material-ui/core';
 import { useNavigate} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import { COLORS } from '../Styles/colors';
+import Input from '../OwnerComponents/Staffs/StaffInput'
 import './Doctors.css';
 
 const Doctor = ()=>{
     const classes = useStyles();
+    const [data,setData] = useState([])
+    const numberId = 10000000;
+    const dataNums = data.length;
+    const initialState = {
+        firstName:'',
+        lastName:'',
+        suffix:'',
+        middleName:'',
+        contactNumber:'',
+        email:'',
+        position:'',
+        StaffId:'',
+        password:'',
+        level: '' 
+
+    }
+    useEffect(()=>{
+        fetch("http://localhost:5000/staff/staffdatas")
+        .then(resp => resp.json())
+        .then(resp => setData(resp))
+    })
+    const [form,setForm] = useState(initialState);
+    const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
     const [open,setOpen] = useState(false);
     const handleClose = () =>{
         setOpen(false);
     }
     const handleClickOpen =()=>{
         setOpen(true);
+        {console.log(data.length)}
         
     }
     return(
@@ -28,7 +53,7 @@ const Doctor = ()=>{
         <Typography> Doctor </Typography>  
         </DialogTitle>
 
-                        {/* <form onSubmit={handleSubmit}>
+                        <form >
                             <Grid container spacing={3} item xs={12}>
                                 <Typography className={classes.numberid}>Number ID: {numberId + dataNums +1}</Typography>
                                 <Input name="lastName" placeholder='Last Name' label='Last Name' handleChange={handleChange} autoFocus/>
@@ -46,7 +71,7 @@ const Doctor = ()=>{
                                 <Button className={classes.cancelbtn} variant="contained" color="primary" onClick={handleClose}>Cancel</Button>
                             
                             </Grid>
-                        </form> */}
+                        </form>
 
 
         </Container>

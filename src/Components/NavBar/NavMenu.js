@@ -104,16 +104,18 @@ const NavMenu = () => {
               </div> */}
             </NavbarBrand>
             {user?.result? (<>
+             
             <NavbarToggler
               onClick={() => setIsOpen(!isOpen)}
               className='mr-2 white '
             />
-            {(user?.result.level === 'Staff' ? <>
+          
             <Collapse
               className='d-sm-inline-flex flex-sm-row-reverse'
               isOpen={isOpen}
               navbar
             >
+               {(user?.result.level === 'Staff' ? <>
               <ul className='navbar-nav flex-grow mx-auto'>
                 {menu.map(({ title, component }, idx) => (
                   <Item
@@ -127,14 +129,7 @@ const NavMenu = () => {
                   />
 
                 ))}
-              </ul>
-            </Collapse>
-            </>:<> <Collapse
-              className='d-sm-inline-flex flex-sm-row-reverse'
-              isOpen={isOpen}
-              navbar
-            >
-              <ul className='navbar-nav flex-grow mx-auto'>
+              </ul></>:<ul className='navbar-nav flex-grow mx-auto'>
                 {doctorMenu.map(({ title, component }, idx) => (
                   <Item
                     key={idx}
@@ -147,8 +142,9 @@ const NavMenu = () => {
                   />
 
                 ))}
-              </ul>
-            </Collapse></>)}
+              </ul>)}
+            </Collapse>
+      
            
 
             <Button className={classes.buttonlogout} variant="contained"  onClick={logout}>Logout</Button>
