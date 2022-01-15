@@ -91,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
 
     logintxt: {
         marginTop: "25px",
-        fontSize: "45px",
+        fontSize: "50px",
         fontWeight: "bold",
         fontFamily: "Pathway Gothic One",
     },
