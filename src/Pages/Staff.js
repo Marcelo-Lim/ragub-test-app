@@ -32,6 +32,9 @@ const Staff = () =>{
         level: ''
 
     }
+    const [showPassword, setShowPassword] = useState(false);
+  const handleShowPassword = () => setShowPassword(!showPassword);
+
     const [form,setForm] = useState(initialState);
     const dispatch = useDispatch();
     const navigate = useNavigate()
@@ -77,7 +80,7 @@ const Staff = () =>{
                             <form onSubmit={handleSubmit}>
                             <Grid container spacing={3} item xs={12}>
                             <Typography className={classes.numberid}>Number ID: {numberId + dataNums +1}</Typography>
-                            <Input name="lastName" placeholder='Last Name' label='Last Name' handleChange={handleChange} autoFocus/>
+                            <Input required name="lastName" placeholder='Last Name' label='Last Name' handleChange={handleChange} autoFocus/>
                             <Input name="firstName" placeholder='FirstName' label='First Name' handleChange={handleChange}/>
                             <Input name="middleName" placeholder='MiddleName' label='Middle Name' handleChange={handleChange}/>
                             <Input name="suffix" placeholder='Suffix' label='Suffix' handleChange={handleChange}/>
@@ -85,7 +88,7 @@ const Staff = () =>{
                             
                             <Input name="email" placeholder='Email' label='Email' handleChange={handleChange}/>
                             <Input name="position" placeholder='Position' label='Position' handleChange={handleChange}/>
-                            <Input name="password" placeholder='EmployeePassword'  label='Password' handleChange={handleChange}/> 
+                            <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
 
                             </Grid>
                             <Grid container justify="center">

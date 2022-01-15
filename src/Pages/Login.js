@@ -8,7 +8,7 @@ import { AUTH } from '../constant';
 
 const Logins = ()=>{
     const [user,setUser] = useState(JSON.parse(localStorage.getItem('profile')))
-    const [form,setForm]=useState({ StaffId:parseInt(''), password: ''})
+    const [form,setForm]=useState({ StaffId:'', password: ''})
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const classes = useStyles();
@@ -39,7 +39,7 @@ return(
             <form className={classes.form} onSubmit={handleSubmit}>
                 <Grid container spacing={4} direction="column">
                     <Grid item>
-                       <TextField className={classes.txtfield} name="StaffId" type="Numbers" label="ID Number" 
+                       <TextField className={classes.txtfield} name="StaffId"  label="ID Number" 
                         placeholder='Enter your Last Name'  autoFocus
                         value={form.StaffId} onChange={handleChange} 
                         variant="outlined" />
