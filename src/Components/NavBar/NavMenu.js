@@ -8,32 +8,24 @@ import {
   NavbarBrand,
   NavbarToggler,
 } from "reactstrap";
-import { Link,useLocation } from "react-router-dom";
+import { Link,useLocation,useNavigate } from "react-router-dom";
+import {useDispatch} from 'react-redux';
 import Item from "./DataItems";
 import "./NavBar.css";
+import * as actionType from '../../constant'
 import { COLORS } from '../Styles/colors';
+import decode from 'jwt-decode';
+import IconClinic from "../../Assets/images/sdmc-no-border.png";
 
 const doctorMenu =[
   {
       title: "Home",
-      component: "/Home"
+      component: "/DoctorHome"
   },
-  {
-      title: "Staff",
-      component: "/Staff"
-  },
-  {
-      title: "Doctor",
-      component: "/Doctor"
-  },
-  {
-      title: "Book Now",
-      component: "/"
-  },/*
-  {
-    title: "Monitoring",
-    component: "/Monitoring"
-  },*/
+//   {
+//     title: "Profile",
+//     component: "/profile"
+// }, 
 ]
 const menu =[
     {
@@ -48,15 +40,15 @@ const menu =[
         title: "Doctors Info",
         component: "/Doctor"
     },
-    {
-        title: "Book Now",
-        component: "/"
-    },
+    // {
+    //     title: "Book Now",
+    //     component: "/"
+    // },
     
-    {
-        title: "Doctor",
-        component: "/DoctorHome"
-    },
+    // {
+    //     title: "Doctor",
+    //     component: "/DoctorHome"
+    // },
     
     /*
     {
@@ -70,10 +62,30 @@ const NavMenu = () => {
     const [user,setUser] = useState(JSON.parse(localStorage.getItem('profile')))
     const [isOpen, setIsOpen] = useState(false);
     const [selectedPage, setSelectedPage] = useState("Home");
+    const location = useLocation();
     const classes = useStyles();
-    
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
 
+    const logout = () => {
+      dispatch({ type: actionType.LOGOUT });
+  
+      navigate('/login');
+  
+      setUser(null);
+    };
 
+    useEffect(() => {
+      const token = user?.token;
+  
+      if (token) {
+        const decodedToken = decode(token);
+  
+        if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+      }
+  
+      setUser(JSON.parse(localStorage.getItem('profile')));
+    }, [location]);
 
     return (
       <AppBar
@@ -85,23 +97,26 @@ const NavMenu = () => {
           className='navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow w-100'
           dark
         >
-          <Container>
+          
 
             <NavbarBrand tag={Link} to='/'>
-              {/* <div className="navbarbrand">
-                <img src={IconClinic} alt='logo' height="50px" width="60px" />
-              </div> */}
+              <div className="navbarbrand">
+                <img src={IconClinic} alt='logo' height="60px" width="60px" />
+              </div>
             </NavbarBrand>
             {user?.result? (<>
+             
             <NavbarToggler
               onClick={() => setIsOpen(!isOpen)}
               className='mr-2 white '
             />
+          
             <Collapse
               className='d-sm-inline-flex flex-sm-row-reverse'
               isOpen={isOpen}
               navbar
             >
+               {(user?.result.level === 'Staff' ? <>
               <ul className='navbar-nav flex-grow mx-auto'>
                 {menu.map(({ title, component }, idx) => (
                   <Item
@@ -115,19 +130,34 @@ const NavMenu = () => {
                   />
 
                 ))}
-              </ul>
-            </Collapse>
+              </ul></>:<ul className='navbar-nav flex-grow mx-auto'>
+                {doctorMenu.map(({ title, component }, idx) => (
+                  <Item
+                    key={idx}
+                    title={title}
+                    component={component}
+                    onClickListener={() => {
+                      setSelectedPage(title);
+                    }}
+                  
+                  />
 
-            {/* { <Button className={classes.buttonlogout} variant="contained"  onClick={logout}>Logout</Button>} */}
+                ))}
+              </ul>)}
+            </Collapse>
+      
+           
+
+            <Button className={classes.buttonlogout} variant="contained"  onClick={logout}>Logout</Button>
 
             </>):(<>
-                  <NavbarBrand tag={Link} to='/Authentication'>
+                  <NavbarBrand tag={Link} to='/'>
                     <div className="navbarbrand">
                       <Button className={classes.buttonlogin} variant="contained">Sign In</Button>
                     </div>
                   </NavbarBrand></>
-            )}
-          </Container>
+          )} 
+          
         </Navbar>
       </AppBar>
     );
@@ -138,15 +168,19 @@ const NavMenu = () => {
       flexGrow: 1,
       fontWeight: "bold",
       fontSize: 25,
+      color: COLORS.WHITE,
       fontFamily: "Pathway Gothic One",
     },
 
     buttonlogout: {
       backgroundColor: "lightgray",
+      color: COLORS.BLACK,
+      
     },
     buttonlogin: {
-    
+      color: COLORS.BLACK,
       backgroundColor: "lightgray",
+      
     },
   }));
   export default NavMenu;
