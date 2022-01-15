@@ -9,24 +9,32 @@ import { newStaffData } from '../Components/Connections/Action/staffs';
 import "./Staff.css";
 import { COLORS } from '../Styles/colors';
 
-const initialState = {
-                        firstName:'',
-                        lastName:'',
-                        suffix:'',
-                        contactNumber:'',
-                        email:'',
-                        position:'',
-                        StaffId: '',
-                        password:''
-                    }
+
 
 const Staff = () =>{
     const classes = useStyles();
     const [data,setData] = useState([])
     const [open,setOpen] = useState(false);
     const [staffId,setStaffId] = useState([]);
+
     const numberId = 10000000;
     const dataNums = data.length;
+    const initialState = {
+        firstName:'',
+        lastName:'',
+        suffix:'',
+        middleName:'',
+        contactNumber:'',
+        email:'',
+        position:'',
+        StaffId:'',
+        password:'',
+        level: ''
+
+    }
+    const [showPassword, setShowPassword] = useState(false);
+  const handleShowPassword = () => setShowPassword(!showPassword);
+
     const [form,setForm] = useState(initialState);
     const dispatch = useDispatch();
     const navigate = useNavigate()
@@ -35,11 +43,14 @@ const Staff = () =>{
     }
     const handleClickOpen =()=>{
         setOpen(true);
-        initialState.StaffId = numberId + dataNums +1;
+        // initialState.StaffId =numberId + dataNums +1;
+        setForm(form.StaffId=numberId + dataNums +1);
+        console.log(form)
     }
     const handleSubmit =(e)=>{
         e.preventDefault();
-            dispatch(newStaffData(form,navigate))
+        setForm(form.StaffId=(numberId + dataNums +1).toString(),form.level='Staff');
+          dispatch(newStaffData(form,navigate))
             console.log(form);
             setOpen(false);
     }
@@ -69,14 +80,15 @@ const Staff = () =>{
                             <form onSubmit={handleSubmit}>
                             <Grid container spacing={3} item xs={12}>
                             <Typography className={classes.numberid}>Number ID: {numberId + dataNums +1}</Typography>
-                            <Input name="lastName" placeholder='Last Name' label='Last Name' handleChange={handleChange} autoFocus/>
+                            <Input required name="lastName" placeholder='Last Name' label='Last Name' handleChange={handleChange} autoFocus/>
                             <Input name="firstName" placeholder='FirstName' label='First Name' handleChange={handleChange}/>
+                            <Input name="middleName" placeholder='MiddleName' label='Middle Name' handleChange={handleChange}/>
                             <Input name="suffix" placeholder='Suffix' label='Suffix' handleChange={handleChange}/>
                             <Input name="contactNumber" placeholder='Contact Number' label='Contact Number' handleChange={handleChange}/>
                             
                             <Input name="email" placeholder='Email' label='Email' handleChange={handleChange}/>
                             <Input name="position" placeholder='Position' label='Position' handleChange={handleChange}/>
-                            <Input name="password" placeholder='EmployeePassword' label='Password'/> 
+                            <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
 
                             </Grid>
                             <Grid container justify="center">
