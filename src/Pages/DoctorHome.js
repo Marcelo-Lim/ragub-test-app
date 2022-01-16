@@ -59,12 +59,12 @@ useEffect(function () {
                     <Typography className={classes.typo4} >{appointment.concernType}</Typography>
                         <Typography className={classes.typo4}>{moment(appointment.dateAndTime).format('D MMM YYYY')}</Typography>
                         <Typography className={classes.typo4} >{moment(appointment.dateAndTime).format('h:mm a')}</Typography>
-                        <Typography className={classes.typo4}>{appointment.appointmentStatus}</Typography>
+                        {/* <Typography className={classes.typo4}>{appointment.appointmentStatus}</Typography>
                         <Typography className={classes.typoIcon}>
                         {appointment.dateAndTime === new Date().toISOString() ? <Typography>Green</Typography>:<Typography>Red</Typography>}
                          <Button  variant="contained" >See Details</Button>
                             
-                        </Typography>       
+                        </Typography>*/}
                 </CardContent>
             </Card>
                 ):  null}

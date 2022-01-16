@@ -22,12 +22,12 @@ const CustomRow = (props) => {
         {show&&<Grid align="right" style={overlayStyle}>
 
             <Grid sm={2} align="center" style={{ background: "#ffffff" }}>
-            <IconButton title="Edit" onClick={()=>alert(props.index)}>
+            {/* <IconButton title="Edit" onClick={()=>alert(props.index)}>
              <EditIcon />
-               </IconButton>
-               <IconButton title="Delete" onClick={()=>dispatch(deleteDeduction(props.data._id))}>
+               </IconButton> */}
+               {/* <IconButton title="Delete" onClick={()=>dispatch(deleteDeduction(props.data._id))}>
                     <DeleteIcon />
-                </IconButton>
+                </IconButton> */}
             </Grid>
 
         </Grid>}
