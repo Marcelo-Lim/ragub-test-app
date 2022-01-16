@@ -64,7 +64,6 @@ const Staff = () =>{
     return(
         <div>
         <div className="add-staff">
-        <h1> Adding Staff </h1>
         <Button className={classes.newstaffbtn} onClick={handleClickOpen}>New Staff</Button>
         </div>
 

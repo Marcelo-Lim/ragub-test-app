@@ -29,9 +29,9 @@ const CustomRow = (props) => {
             <IconButton title="Edit" onClick={()=>dispatch(cancelAppointment(props.data._id,{...appointmentStatus})) && props.handleEmailSubmit(props.data)}>
              <CheckIcon />
                </IconButton>
-               <IconButton title="Delete" onClick={()=>console.log(props.index)}>
+               {/* <IconButton title="Delete" onClick={()=>console.log(props.index)}>
                     <CancelIcon />
-                </IconButton>
+                </IconButton> */}
             </Grid>
 
         </Grid>}
