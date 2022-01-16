@@ -14,3 +14,7 @@ API.interceptors.request.use((req) => {
   export const deleteStaffData = (id) => API.delete(`/staff/${id}/remove`);
   export const cancelAppointment = (id,cancelApps) => API.patch(`/appointment/${id}/cancelAppointment`, cancelApps);
   export const signInStaff = (formData) => API.post('/staff/signin/staff', formData);
+
+  export const newDoctorData = (newDatas) => API.post('/doctor/newDoctor',newDatas);
+  export const signInData = (formData) => API.post('/doctor/signin/doctor', formData);
+  export const deleteDoctorData = (id) => API.delete(`/doctor/${id}/remove`);

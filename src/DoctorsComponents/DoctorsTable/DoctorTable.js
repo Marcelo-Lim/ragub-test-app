@@ -25,7 +25,7 @@ const DoctorTable = ()=>{
         },]
 
                 useEffect(()=>{
-                    fetch("http://localhost:5000/staff/staffdatas")
+                    fetch("http://localhost:5000/doctor/doctors/data")
                     .then(resp => resp.json())
                     .then(resp => setData(resp))
                 })
