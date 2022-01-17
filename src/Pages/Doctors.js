@@ -27,7 +27,6 @@ const Doctor = ()=>{
         level: '' 
 
     }
-
     const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => setShowPassword(!showPassword);
     const dispatch = useDispatch();
@@ -77,7 +76,7 @@ const Doctor = ()=>{
                             
                                 <Input name="email" placeholder='Email' label='Email' handleChange={handleChange}/>
                                 <Input name="position" placeholder='Specialization' label='Specialization' handleChange={handleChange}/>
-                                <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} /> 
+                                <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
 
                             </Grid>
                             <Grid container justify="center">

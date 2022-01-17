@@ -40,7 +40,7 @@ return(
                 <Grid container spacing={4} direction="column">
                     <Grid item>
                        <TextField className={classes.txtfield} name="StaffId"  label="ID Number" 
-                        placeholder='Enter your Last Name'  autoFocus
+                        placeholder='Enter your ID Number'  autoFocus
                         value={form.StaffId} onChange={handleChange} 
                         variant="outlined" />
                     </Grid>
@@ -91,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
 
     logintxt: {
         marginTop: "25px",
-        fontSize: "45px",
+        fontSize: "50px",
         fontWeight: "bold",
         fontFamily: "Pathway Gothic One",
     },

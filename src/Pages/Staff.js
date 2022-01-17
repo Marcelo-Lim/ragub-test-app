@@ -64,7 +64,6 @@ const Staff = () =>{
     return(
         <div>
         <div className="add-staff">
-        <h1> Adding Staff </h1>
         <Button className={classes.newstaffbtn} onClick={handleClickOpen}>New Staff</Button>
         </div>
 
@@ -94,12 +93,10 @@ const Staff = () =>{
                             <Grid container justify="center">
                             <Button className={classes.addbtn} type="submit" variant="contained" color="primary">Add</Button>
                             <Button className={classes.cancelbtn} variant="contained" color="primary" onClick={handleClose}>Cancel</Button>
-                            
+        
                             </Grid>
                             </form>
                         
-
-
                     </Container>
         </Dialog>
 
