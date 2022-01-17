@@ -33,7 +33,7 @@ const StaffTable=()=> {
             title: "Contact Number", field:"contactNumber"
         },]
     useEffect(()=>{
-        fetch("http://localhost:5000/staff/staffdatas")
+        fetch("https://sdmc-clinic.herokuapp.com/staff/staffdatas")
         .then(resp => resp.json())
         .then(resp => setData(resp))
     })

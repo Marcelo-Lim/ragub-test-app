@@ -37,7 +37,7 @@ const Home = () => {
 
     
     useEffect(()=>{
-        fetch("http://localhost:5000/appointment/appointmentsss")
+        fetch("https://sdmc-clinic.herokuapp.com/appointment/appointmentsss")
         .then(resp => resp.json())
         .then(resp => setData(resp))
     })
