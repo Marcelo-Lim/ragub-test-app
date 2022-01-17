@@ -51,6 +51,9 @@ return(
                     </Grid>
                 </Grid>
                 <Button type='submit'className={classes.submit}> Log in</Button>
+                <Button>
+                    Forgot your password?
+                </Button>
             </form>
            
             </Paper>

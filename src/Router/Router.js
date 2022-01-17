@@ -10,6 +10,7 @@ import Login from '../Pages/Login';
 import Staff from '../Pages/Staff';
 import DoctorHome from '../Pages/DoctorHome';
 import ProfileDoctor from '../Pages/ProfileDoctor';
+import Reports from '../Pages/Reports';
 
 
 const PageRouter = () => {
@@ -31,6 +32,7 @@ const PageRouter = () => {
                 <Route exact path='/Doctor' element={<Doctor/>}/>
                 <Route exact path='/DoctorHome' element={<DoctorHome/>}/>
                 <Route exact path='/profile' element={<ProfileDoctor/>}/>
+                <Route exact path='/Reports' element={<Reports/>}/>
             </Routes>
         
         </Router>

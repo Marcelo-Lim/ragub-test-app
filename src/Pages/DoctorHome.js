@@ -9,23 +9,48 @@ import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import { COLORS } from "../Styles/colors";
+import MaterialTable from "material-table";
+import tableIcons from '../Components/MaterialTable/MaterialTableIcons'
 
 const Doctor = () => {
+
 const classes = useStyles();
 const [searchData,setSearchData]= useState('');
 const [data,setData] =useState([])
 useEffect(function () {
-    fetch("http://localhost:5000/appointment/appointmentsss")
+    fetch("https://sdmc-clinic.herokuapp.com/appointment/appointmentsss")
     .then(resp=>resp.json())
     .then(resp=>setData(resp))
 
 })
+
+const columns = [
+    { field: 'firstName', title: 'Name', width: 160 },
+    { field: 'concerns', title: 'Concern', width: 200 },
+    { field: 'concernType', title: 'Concern Type', width: 150 },
+    {
+        field: 'dateAndTime',
+        title: 'Date and Time',
+        width: 150,
+    },
+    {
+        field: 'appointmentStatus',
+        title: 'Status',
+        sortable: false,
+        width: 100,
+    },
+];
+
+
+
+
+
     return (
         <div>
             <Container className={classes.container}>
                 <Paper className={classes.paper} elevation={5}>
                     <Typography className={classes.typo1}>Doctor's Patient Records</Typography>
-                        <InputBase
+                        {/* <InputBase
                             className={classes.input}
                             sx={{ ml: 1, flex: 1 }}
                             placeholder="..Search Patient"
@@ -33,8 +58,8 @@ useEffect(function () {
                             onChange={(event)=>{
                                 setSearchData(event.target.value);
                             }}
-                        />
-                        <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
+                        /> */}
+                        {/* <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
                             <SearchIcon className={classes.icon} />
                         </IconButton>
                         {data.filter((appointment)=>{
@@ -45,31 +70,21 @@ useEffect(function () {
                                 return appointment
                             }
                         }).map((appointment,index) => (
-                           
-                            <Grid item key={index} xs={12} >
-                    {appointment.appointmentStatus === 'Approved' ?
-                             (
-              
-                  
-                      
-                <Card className={classes.card1 }>
-                    <CardContent>
-                    <Typography className={classes.typo4} >{appointment.firstName},{appointment.lastName}</Typography>
-                    <Typography className={classes.typo4} >{appointment.concerns}</Typography>
-                    <Typography className={classes.typo4} >{appointment.concernType}</Typography>
-                        <Typography className={classes.typo4}>{moment(appointment.dateAndTime).format('D MMM YYYY')}</Typography>
-                        <Typography className={classes.typo4} >{moment(appointment.dateAndTime).format('h:mm a')}</Typography>
-                        {/* <Typography className={classes.typo4}>{appointment.appointmentStatus}</Typography>
-                        <Typography className={classes.typoIcon}>
-                        {appointment.dateAndTime === new Date().toISOString() ? <Typography>Green</Typography>:<Typography>Red</Typography>}
-                         <Button  variant="contained" >See Details</Button>
+
                             
-                        </Typography>*/}
-                </CardContent>
-            </Card>
-                ):  null}
-                 </Grid>
-                         ) )}
+                        ) )} */}
+
+<div style={{ height: 400, width: '100%' }}>
+                            <MaterialTable  
+                            icons={tableIcons}
+                            title="Staff Information "
+                            data={data}
+               
+                            columns={columns}
+                            
+                        />
+                            </div>
+
                 </Paper> 
             </Container>
         </div>
@@ -110,6 +125,13 @@ const useStyles = makeStyles((theme) => ({
         color: COLORS.BLACK,
         width: "100%",
     },
+
+    card1: {
+        display:"flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center"
+    }
 
 }))
 export default Doctor;
