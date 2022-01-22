@@ -30,7 +30,7 @@ export const deleteDeduction = (id) => async (dispatch) => {
       const { data } = await api.signInStaff(formData);
   
       dispatch({ type: AUTH, data });
-     navigate('/')
+      navigate('/middles')
       
     } catch (error) {
       console.log(error);
