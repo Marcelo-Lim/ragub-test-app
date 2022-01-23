@@ -4,30 +4,50 @@ import { Typography, makeStyles,Button,
     CircularProgress,CardContent, CardActionArea,
     Dialog,DialogActions,DialogContent,DialogContentText,
     DialogTitle, TextField} from "@material-ui/core";
-import ClientsTB from './clientTable'
+import DoctorTable from './doctorsTable'
 
 
-const ClientsHome =() =>{
+const Doctors =()=>{
+    const [open,setOpen] = useState(false);
+    const initialState={
+        StaffId: '',
+        firstName:'',
+        lastName:'',
+        middleName:'',
+        suffix:'',
+        doctorsSpeciality:'',
+        contactNumber:'',
+        email:''
+    }
+    const [values,setValues] = useState(initialState);
     const classes = useStyles();
-    
+
+    const handleClose=()=>{
+        setOpen(false);
+    }
+
     return(
+        <div>
         <Container component="main" maxWidth="lg">
            <Paper className={classes.paper} elevation={0}>
-                <Typography component="h1" variant="h5">Clients Informations</Typography>
+                <Typography component="h1" variant="h5">Doctors Information</Typography>
+                <Button variant="contained" color="primary" >Add Doctors</Button>
            </Paper>
-           <ClientsTB/>
+           <DoctorTable/>
         </Container>
+        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        </Dialog>
+        </div>
     )
 }
 const useStyles = makeStyles((theme) => ({
     paper: {
-      marginTop: theme.spacing(4),
+      marginTop: theme.spacing(5),
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       padding: theme.spacing(2),
       marginBottom: theme.spacing(1),
-    
       
     },
     paper1:{
@@ -59,5 +79,4 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: theme.spacing(2),
     },
   }));
-
-export default ClientsHome
+export default Doctors;

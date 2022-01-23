@@ -2,6 +2,7 @@ import React,{useEffect,useState} from 'react';
 import MaterialTable from 'material-table';
 import { Container} from "@material-ui/core";
 import tableIcons from '../../MaterialTable/MaterialTableIcons';
+import CustomRow from './index';
 
 const ClientsTB = () =>{
     const [data,setData] = useState([]);
@@ -19,7 +20,7 @@ const ClientsTB = () =>{
             title: "Contact Number", field:"contactNumber"
         },
         {
-            title: "Actions"
+            title: "Actions",width: "3%"
         }]
 
         useEffect(()=>{
@@ -33,8 +34,11 @@ const ClientsTB = () =>{
             <MaterialTable  
             icons={tableIcons}
             title="Information"
-            //   data={data}
+            data={data}
             columns={columns}
+            components={{
+                Row: props => <CustomRow {...props}/>
+              }}
              />
         </Container>
     )

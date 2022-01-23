@@ -11,19 +11,24 @@ const Admin =() =>{
         <Container component="main" maxWidth="xl" >
              <Paper className={classes.paper} elevation={0}>
                 <Grid container>
-                    <Grid item sm={6}>
-                        <Paper className={classes.paper1}>
-                        <Typography>Appointments Today</Typography>
+                    <Grid item sm={3}>
+                        <Paper className={classes.paper1}  elevation={4}>
+                        <Typography component="h1" variant="h6">Appointments Today</Typography>
                         </Paper>
                     </Grid>
-                    <Grid item sm={6}>
-                        <Paper className={classes.paper1}>
-                        <Typography>Pending Appointments</Typography>
+                    <Grid item sm={3}>
+                        <Paper className={classes.paper1} elevation={4}>
+                        <Typography component="h1" variant="h6">Pending Appointments</Typography>
                         </Paper>
                     </Grid>
-                    <Grid item sm={6}>
-                        <Paper className={classes.paper1}>
-                        <Typography>Available Doctors</Typography>
+                    <Grid item sm={3}>
+                        <Paper className={classes.paper1} elevation={4}>
+                        <Typography  component="h1" variant="h6">Available Doctors</Typography>
+                        </Paper>
+                    </Grid>
+                    <Grid item sm={3}>
+                        <Paper className={classes.paper1} elevation={4}>
+                        <Typography component="h1" variant="h6">Number of Clients</Typography>
                         </Paper>
                     </Grid>
                 </Grid>
@@ -37,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(10),
       display: 'flex',
       flexDirection: 'column',
+      
       alignItems: 'center',
       padding: theme.spacing(2),
       marginBottom: theme.spacing(10),
@@ -47,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
+      height: '100px',
       padding: theme.spacing(2),
       marginBottom: theme.spacing(2),
       marginLeft: theme.spacing(2),

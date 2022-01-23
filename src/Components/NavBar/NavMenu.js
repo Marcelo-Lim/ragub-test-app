@@ -24,7 +24,7 @@ const menu =[
     },
     {
       title: "Appointments",
-      component: "/doctorsPanel"
+      component: "/appointmentStatus"
   },
     {
       title: "Clients",
@@ -40,7 +40,7 @@ const menu =[
     },
     {
       title: "Profile",
-      component: "/Doctor"
+      component: "/adminprofile"
     }
     
 ]
