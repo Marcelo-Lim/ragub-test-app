@@ -15,15 +15,19 @@ import Grow from '@mui/material/Grow';
 import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
+import MaterialTable from "material-table";
+import tableIcons from '../Components/MaterialTable/MaterialTableIcons'
 
 const Reports = () => {
 const classes = useStyles();
 const [searchData,setSearchData]= useState('');
 const [data,setData] =useState([])
+const [appointment,setAppointment] =useState([])
 useEffect(function () {
-    fetch("http://localhost:5000/appointment/appointmentsss")
+    fetch("https://sdmc-clinic.herokuapp.com/appointment/appointmentsss")
     .then(resp=>resp.json())
     .then(resp=>setData(resp))
+    .then(setAppointment(data))
 })
 
 const options = ['Pending Appointments', 'Approved Appointments', 'Declined Appointments'];
@@ -32,16 +36,13 @@ const [open, setOpen] = React.useState(false);
 const anchorRef = React.useRef(null);
 const [selectedIndex, setSelectedIndex] = React.useState(0);
 
-const handleClick = () => {
-    console.info(`You clicked ${options[selectedIndex]}`);
-};
-
 const handleMenuItemClick = (event, index) => {
     setSelectedIndex(index);
     setOpen(false);
 };
 
 const handleToggle = () => {
+    
     setOpen((prevOpen) => !prevOpen);
 };
 
@@ -53,27 +54,54 @@ const handleClose = (event) => {
     setOpen(false);
 };
 
+const setFilter = (filter) => {
+    var length = appointment.length
+    var report = []
+    for (var i = 0; i < length; i++) {
+        var status = appointment[i].appointmentStatus + " Appointments"
+        if(filter == status) {
+            report.push(appointment[i])
+        }
+    }
+    setData(report)
+    console.log(data)
+
+};
+
+const handleClick = () => {
+    console.info(`You clicked ${options[selectedIndex]}`);
+    setFilter(`${options[selectedIndex]}`)
+};
+
+const columns = [
+    { field: 'firstName', title: 'Name', width: 160 },
+    { field: 'concerns', title: 'Concern', width: 200 },
+    { field: 'concernType', title: 'Concern Type', width: 150 },
+    {
+        field: 'dateAndTime',
+        title: 'Date and Time',
+        width: 150,
+    },
+    {
+        field: 'appointmentStatus',
+        title: 'Status',
+        sortable: false,
+        width: 100,
+        lookup: { Pending: 'Pending', Approved: 'Approved', Cancelled: "Cancelled" },
+    },
+    
+];
+
+
+
 
     return (
         <div>
             <Container className={classes.container}>
                 <Paper className={classes.paper} elevation={5}>
                     <Typography className={classes.typo1}>Reports</Typography>
-                        <InputBase
-                            className={classes.input}
-                            sx={{ ml: 1, flex: 1 }}
-                            placeholder="..Search Patient"
-                            inputProps={{ 'aria-label': 'search google maps' }}
-                            onChange={(event)=>{
-                                setSearchData(event.target.value);
-                            }}
-                        />
-                        <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
-                            <SearchIcon className={classes.icon} />
-                        </IconButton>
-
                         <Grid className={classes.splitbtngrid}>
-                        <ButtonGroup variant="contained" ref={anchorRef} aria-label="split button">
+                        <ButtonGroup className={classes.btngroup} variant="contained" ref={anchorRef} aria-label="split button">
         <Button onClick={handleClick}>{options[selectedIndex]}</Button>
         <Button
             size="small"
@@ -86,6 +114,19 @@ const handleClose = (event) => {
             <ArrowDropDownIcon />
         </Button>
         </ButtonGroup>
+        <div className={classes.materialtbl} style={{ height: 400, width: '100%',  }}>
+                            <MaterialTable  
+                            icons={tableIcons}
+                            title="Staff Information "
+                            data={data}
+                            columns={columns}
+                            options={{
+                                filtering: true
+                            }}
+                            
+                        />
+                            </div>
+
         <Popper
         open={open}
         anchorEl={anchorRef.current}
@@ -118,43 +159,14 @@ const handleClose = (event) => {
             </Paper>
             </Grow>
         )}
+
         </Popper>
-        </Grid>                   
 
-
-                        {data.filter((appointment)=>{
-                            if(searchData==''){
-                                return appointment
-                            }
-                            else if(appointment.firstName.toLowerCase().includes(searchData.toLowerCase())){
-                                return appointment
-                            }
-                        }).map((appointment,index) => (
-                            
-
-                            <Grid item key={index} xs={12} >
-                    {appointment.appointmentStatus === 'Approved' ?
-                    (
-
-                <Card className={classes.card1 }>
-                    
-                    <CardContent>
-                    <Typography className={classes.typo4} >{appointment.firstName},{appointment.lastName}</Typography>
-                    <Typography className={classes.typo4} >{appointment.concerns}</Typography>
-                    <Typography className={classes.typo4} >{appointment.concernType}</Typography>
-                        <Typography className={classes.typo4}>{moment(appointment.dateAndTime).format('D MMM YYYY')}</Typography>
-                        <Typography className={classes.typo4} >{moment(appointment.dateAndTime).format('h:mm a')}</Typography>
-                        {/* <Typography className={classes.typo4}>{appointment.appointmentStatus}</Typography>
-                        <Typography className={classes.typoIcon}>
-                        {appointment.dateAndTime === new Date().toISOString() ? <Typography>Green</Typography>:<Typography>Red</Typography>}
-                        <Button  variant="contained" >See Details</Button>
-                            
-                        </Typography>*/}
-                </CardContent>
-            </Card>
-                ):  null}
-                    </Grid>
-                        ) )}
+        </Grid> 
+                                
+               
+                
+                        
                 </Paper> 
             </Container>
         </div>
@@ -198,6 +210,15 @@ const useStyles = makeStyles((theme) => ({
 
     splitbtngrid: {
         marginBottom: "25px",
+    },
+
+    btngroup: {
+        zIndex: "-1",
+    },
+
+    materialtbl: {
+        marginTop: "50px",
+        zIndex: "-1",
     }
 
 }))
