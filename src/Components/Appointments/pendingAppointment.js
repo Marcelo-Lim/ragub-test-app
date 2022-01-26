@@ -62,7 +62,7 @@ const PendingAppointments =() =>{
         }
     ]
     useEffect(()=>{
-        fetch("http://localhost:5000/appointment/appointmentsss")
+        fetch("https://sdmc-clinic.herokuapp.com/appointment/appointmentsss")
         .then(resp => resp.json())
         .then(resp => setData(resp))
     })
@@ -71,7 +71,7 @@ const PendingAppointments =() =>{
     },[data])
 
     useEffect(()=>{
-        fetch("http://localhost:5000/doctor/doctors/data")
+        fetch("https://sdmc-clinic.herokuapp.com/doctor/doctors/data")
         .then(resp => resp.json())
         .then(resp => setDrops(resp))
     })
