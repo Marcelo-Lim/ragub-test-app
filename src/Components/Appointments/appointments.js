@@ -3,19 +3,26 @@ import { Typography, makeStyles,Button,
     Paper, Container, Grid, Card, 
     CircularProgress,CardContent, CardActionArea,
     Dialog,DialogActions,DialogContent,DialogContentText,
-    DialogTitle, TextField} from "@material-ui/core";
-
+    DialogTitle, TextField,MenuItem} from "@material-ui/core";
+import Autocomplete from '@mui/material/Autocomplete';
 import ApprovedAppointments from './approvedAppointments';
 import PendingAppointments from './pendingAppointment';
 import CancelledAppointments from './cancelAppointments';
 
+
+
+const options = ['Pending Appointments','Cancelled Appointments','Approved Appointment',
+'Complete Appointment','Decline Appointment'];
 const Appointments =() =>{
     const classes = useStyles()
+   
     return(
         <Container component="main" maxWidth="lg">
             <Paper className={classes.paper}>
                 <Paper className={classes.paper1} elevation={0}>
                     <Typography component="h1" variant="h5">Appointments</Typography>
+
+                   
                 </Paper>
 
                       <PendingAppointments/>
@@ -28,6 +35,7 @@ const Appointments =() =>{
                      </Paper>
                          <CancelledAppointments/>
             
+                
             </Paper>
         </Container>
     )

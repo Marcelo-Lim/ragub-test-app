@@ -1,12 +1,21 @@
 import React,{useEffect,useState} from 'react';
 import MaterialTable from 'material-table';
-import { Container} from "@material-ui/core";
+import { Typography, makeStyles,Button,
+    Paper, Container, Grid,IconButton,InputAdornment, Card, 
+    CircularProgress,CardContent, CardActionArea,
+    Dialog,DialogActions,DialogContent,
+    DialogTitle, TextField,FormControlLabel,MenuItem} from "@material-ui/core";
 import tableIcons from '../MaterialTable/MaterialTableIcons';
-import CustomRow from './index2'
+import CustomRow from './index3'
+import moment from 'moment';
+
 
 const CancelledAppointments =() =>{
     const [data,setData] = useState([]);
     const [filteredData,setFilteredData]=useState(data)
+    const [values,setValues]= useState([]);
+    const [open,setOpen] = useState(false);
+    
     const columns=[ 
         {
             title: "Patient Name", field: "firstName"
@@ -39,6 +48,13 @@ const CancelledAppointments =() =>{
         setFilteredData(data.filter(d=>d.appointmentStatus === 'Cancelled' ));
         
     },[data])
+    const handleOpen =(data)=>{
+        setOpen(true);
+        setValues(data)
+    }
+    const handleClose =()=>{
+        setOpen(false)
+    }
     return (
         <Container component="main" maxWidth='lg'>
              <MaterialTable 
@@ -47,7 +63,7 @@ const CancelledAppointments =() =>{
                 data={filteredData}
                 columns={columns}
                 components={{
-                Row: props => <CustomRow {...props} />
+                Row: props => <CustomRow {...props} handleOpen={handleOpen}/>
                 }} 
         />
         </Container>

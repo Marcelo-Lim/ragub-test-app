@@ -156,7 +156,7 @@ const Employees =() =>{
                 </Grid>
                 <Grid item xs={12}> 
                     <TextField  name="suffix" label="Suffix" 
-                         placeholder='Enter Suffix' required
+                         placeholder='Enter Suffix' 
                         value={values.suffix} 
                       onChange={handleChange} 
                         fullWidth  variant="outlined" />

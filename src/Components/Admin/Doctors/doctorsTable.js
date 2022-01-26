@@ -2,6 +2,7 @@ import React,{useEffect,useState} from 'react';
 import MaterialTable from 'material-table';
 import tableIcons from '../../MaterialTable/MaterialTableIcons'
 import { Container} from "@material-ui/core";
+import CustomRow from './index'
 const DoctorsTable =()=>{
     const [data,setData] = useState([]);
 
@@ -18,6 +19,15 @@ const DoctorsTable =()=>{
         {
             title: "Middle Name", field:"middleName" 
         },
+        {
+            title: "Email", field:"email" 
+        },
+        {
+            title: "Contact Number", field:"email" 
+        },
+        {
+            title: "Specialization", field:"doctorsSpeciality" 
+        },
        ]
        useEffect(()=>{
         fetch("http://localhost:5000/doctor/doctors/data")
@@ -33,9 +43,9 @@ const DoctorsTable =()=>{
             title="Information"
             data={data}
             columns={columns}
-            //   components={{
-            //       Row: props => <CustomRow {...props} handleClickedOpen={handleClickedOpen} handleClickedOpenDelete={handleClickedOpenDelete} handleClickedOpenView={handleClickedOpenView}/>
-            //     }}
+              components={{
+                  Row: props => <CustomRow {...props}/>
+                }}
             />
          </Container>
     )

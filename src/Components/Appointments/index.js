@@ -8,6 +8,7 @@ import ForwardToInboxIcon from '@mui/icons-material/ForwardToInbox';
 import AttachEmailIcon from '@mui/icons-material/AttachEmail';
 import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 import BeenhereTwoToneIcon from '@mui/icons-material/BeenhereTwoTone';
+import PreviewIcon from '@mui/icons-material/Preview';
 import { useDispatch } from 'react-redux';
 
 const CustomRow = (props) => {
@@ -23,11 +24,15 @@ const CustomRow = (props) => {
               {show&&<Grid align="right" style={overlayStyle}>
 
                     <Grid sm={2} align="center" style={{ background: "#ffffff" }}>
-                        <IconButton title="Doctor Search" onClick={()=>alert(props.index)}>
+                      
+                        <IconButton title="Doctor Search" onClick={()=>props.handleOpen(props.data)}>
                         <PersonSearchIcon/>
                         </IconButton>
-                        <IconButton title="Approve Appointment" onClick={()=>alert(props.index)}>
+                        <IconButton title="Approve Appointment" onClick={()=>props.handleOpenEmail(props.data)}>
                         <BeenhereTwoToneIcon/>
+                        </IconButton>
+                        <IconButton title="View Appointment" onClick={()=>props.handleOpenView(props.data)}>
+                        <PreviewIcon/>
                         </IconButton>
                        
                       </Grid>
