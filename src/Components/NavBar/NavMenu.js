@@ -17,46 +17,44 @@ import { COLORS } from '../Styles/colors';
 import decode from 'jwt-decode';
 import IconClinic from "../../Assets/images/sdmc-no-border.png";
 
-const doctorMenu =[
-  {
-      title: "Home",
-      component: "/DoctorHome"
-  },
-//   {
-//     title: "Profile",
-//     component: "/profile"
-// }, 
-]
 const menu =[
     {
         title: "Home",
         component: "/Home"
     },
     {
-        title: "Staffs Info",
-        component: "/Staff"
+      title: "Appointments",
+      component: "/appointmentStatus"
+  },
+    {
+      title: "Clients",
+      component: "/clientsPanel"
+  },
+    {
+        title: "Employee",
+        component: "/employeePanel"
     },
     {
-        title: "Doctors Info",
-        component: "/Doctor"
+        title: "Doctors",
+        component: "/doctorsPanel"
     },
-    // {
-    //     title: "Book Now",
-    //     component: "/"
-    // },
-    
-    // {
-    //     title: "Doctor",
-    //     component: "/DoctorHome"
-    // },
-    
-    /*
     {
-      title: "Monitoring",
-      component: "/Monitoring"
-    },*/
+      title: "Profile",
+      component: "/adminprofile"
+    }
+    
 ]
 
+const menu1 = [
+  {
+    title: "Home",
+    component: "/employee"
+  },
+  {
+    title: "Profile",
+    component: "/employee"
+  }
+]
 
 const NavMenu = () => {
     const [user,setUser] = useState(JSON.parse(localStorage.getItem('profile')))
@@ -97,7 +95,7 @@ const NavMenu = () => {
           className='navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow w-100'
           dark
         >
-          
+          {/* //  <Container> */}
 
             <NavbarBrand tag={Link} to='/'>
               <div className="navbarbrand">
@@ -110,14 +108,14 @@ const NavMenu = () => {
               onClick={() => setIsOpen(!isOpen)}
               className='mr-2 white '
             />
-          
-            <Collapse
+         
+          <Collapse
               className='d-sm-inline-flex flex-sm-row-reverse'
               isOpen={isOpen}
               navbar
             >
-               {(user?.result.level === 'Staff' ? <>
-              <ul className='navbar-nav flex-grow mx-auto'>
+             {user?.result.position === 'Administrator' ? <>
+            <ul className='navbar-nav flex-grow mx-auto'>
                 {menu.map(({ title, component }, idx) => (
                   <Item
                     key={idx}
@@ -130,8 +128,10 @@ const NavMenu = () => {
                   />
 
                 ))}
-              </ul></>:<ul className='navbar-nav flex-grow mx-auto'>
-                {doctorMenu.map(({ title, component }, idx) => (
+              </ul>
+              </>:<>
+              <ul className='navbar-nav flex-grow mx-auto'>
+                {menu1.map(({ title, component }, idx) => (
                   <Item
                     key={idx}
                     title={title}
@@ -139,17 +139,16 @@ const NavMenu = () => {
                     onClickListener={() => {
                       setSelectedPage(title);
                     }}
-                  
                   />
-
                 ))}
-              </ul>)}
+              </ul>
+                </>}
             </Collapse>
       
            
 
             <Button className={classes.buttonlogout} variant="contained"  onClick={logout}>Logout</Button>
-
+           
             </>):(<>
                   <NavbarBrand tag={Link} to='/'>
                     <div className="navbarbrand">
@@ -157,7 +156,7 @@ const NavMenu = () => {
                     </div>
                   </NavbarBrand></>
           )} 
-          
+          {/* </Container> */}
         </Navbar>
       </AppBar>
     );
