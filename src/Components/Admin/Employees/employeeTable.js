@@ -66,7 +66,7 @@ const Employees =() =>{
         }]
 
         useEffect(()=>{
-            fetch("http://localhost:5000/staff/staffdatas")
+            fetch("https://sdmc-clinic.herokuapp.com/staff/staffdatas")
             .then(resp => resp.json())
             .then(resp => setData(resp))
         })
@@ -126,7 +126,9 @@ const Employees =() =>{
         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
              <Container component ="main" maxWidth="lg">
             <DialogTitle id="form-dialog-title">
-                    <Typography component="h1" variant="h5"  className={classes.addstaff}>Employee </Typography>     
+                <div className={classes.division}>
+                    <Typography component="h1" variant="h5"  className={classes.addstaff}>Employee </Typography>    
+                </div> 
             </DialogTitle>
             <form onSubmit={handleSubmit}>
             <Grid container spacing={3}>
@@ -225,7 +227,6 @@ const Employees =() =>{
                         </Grid>
                       </Grid>
                       <DialogActions>
-                          
                       <Button   variant="contained" color="primary" onClick={deleteData}>Yes</Button>
                         <Button  variant="contained" color="secondary" onClick={handleCloseDelete}>No</Button>
                       </DialogActions>
@@ -234,29 +235,31 @@ const Employees =() =>{
 
                   <Dialog open={openView} onClose={handleCloseView} aria-labelledby="form-dialog-title">
                      <DialogTitle>
-                         <Typography component="h1" variant="h5"  className={classes.addstaff}>Employee Details </Typography>     
+                         <div className={classes.division}>
+                         <Typography component="h1" variant="h5"  className={classes.details}>Employee Details </Typography>
+                         </div>     
                     </DialogTitle>
                     <Container component="main" maxWidth="md">
                         <Grid container spacing={3}>
                             <Grid item xs={12}>
-                                <Typography component="h2" variant="h5">Full Name:</Typography>
-                                <Typography component="h1" variant="h5"  className={classes.addstaff}>{values.lastName},{values.firstName}  {values.middleName} {values.suffix}</Typography>
+                                <Typography className={classes.subdetails} component="h2" variant="h5">Full Name:</Typography>
+                                <Typography component="h1" variant="h5">{values.lastName},{values.firstName}  {values.middleName} {values.suffix}</Typography>
                             </Grid>
                             <Grid item xs={12}>
-                                <Typography component="h2" variant="h5">Contact Number:</Typography>
-                                <Typography component="h1" variant="h5"  className={classes.addstaff}>{values.contactNumber}</Typography>
+                                <Typography className={classes.subdetails} component="h2" variant="h5">Contact Number:</Typography>
+                                <Typography component="h1" variant="h5" >{values.contactNumber}</Typography>
                             </Grid>
                             <Grid item xs={12}>
-                                <Typography component="h2" variant="h5">Email Address:</Typography>
-                                <Typography component="h1" variant="h5"  className={classes.addstaff}>{values.email}</Typography>
+                                <Typography className={classes.subdetails} component="h2" variant="h5">Email Address:</Typography>
+                                <Typography component="h1" variant="h5"  >{values.email}</Typography>
                             </Grid>
                             <Grid item xs={12}>
-                                <Typography component="h2" variant="h5">Type of Employee:</Typography>
-                                <Typography component="h1" variant="h5"  className={classes.addstaff}>{values.employeetype}</Typography>
+                                <Typography  className={classes.subdetails} component="h2" variant="h5">Type of Employee:</Typography>
+                                <Typography component="h1" variant="h5"  >{values.employeetype}</Typography>
                             </Grid>
                             <Grid item xs={12}>
-                                <Typography component="h2" variant="h5">Position:</Typography>
-                                <Typography component="h1" variant="h5"  className={classes.addstaff}>{values.position}</Typography>
+                                <Typography  className={classes.subdetails} component="h2" variant="h5">Position:</Typography>
+                                <Typography component="h1" variant="h5"  >{values.position}</Typography>
                             </Grid>
                         </Grid> 
                         <DialogActions>
@@ -333,6 +336,27 @@ const useStyles = makeStyles((theme) => ({
     googleButton: {
       marginBottom: theme.spacing(2),
     },
+
+    details: {
+        textAlign: "center",
+        fontSize: "25px",
+        fontWeight: "bold",
+    },
+
+    division: {
+        borderBottom: "3px solid red"
+    },
+
+    subdetails: {
+        fontWeight: "bold",
+    },
+
+    addstaff: {
+        textAlign: "center",
+        fontSize: "25px",
+        fontWeight: "bold",
+    },
+
   }));
 
 export default Employees

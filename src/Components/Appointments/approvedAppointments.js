@@ -39,7 +39,7 @@ const ApprovedAppointments =() =>{
         }
     ]
     useEffect(()=>{
-        fetch("http://localhost:5000/appointment/appointmentsss")
+        fetch("https://sdmc-clinic.herokuapp.com/appointment/appointmentsss")
         .then(resp => resp.json())
         .then(resp => setData(resp))
     })
@@ -63,43 +63,48 @@ const ApprovedAppointments =() =>{
                 columns={columns}
                 components={{
                 Row: props => <CustomRow {...props} handleClickedOpen={handleClickedOpen}/>
-                }} 
+                }}
+
         />
 
 
                 <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                     <Container component="main" maxWidth='lg'>
                         <DialogTitle>
-                            <Typography>Appointment Details</Typography>
+                            <div className={classes.division}>
+                            <Typography className={classes.details}>Approved Appointment Details</Typography>
+                            </div>
                         </DialogTitle>
                         <Grid container spacing={2} justify="center">
                         <Grid item xs={12}>
-                            <Typography>Client Details</Typography>
+                            <Typography className={classes.subdetails}>Client Details</Typography>
                         </Grid>
                         <Grid item xs={12} >
-                            <Typography> Name:</Typography>
-                            <Typography> {values.suffix === 'undefined'? values.lastName +", "+ values.firstName +" "+values.middleName:values.lastName +" "+values.suffix+", "+ values.firstName +" "+values.middleName}</Typography>
-                            <Typography>Contact Number:</Typography>
-                            <Typography>{values.contactNumber}</Typography>
-                            <Typography>Email Address:</Typography>
-                            <Typography>{values.email}</Typography>
+                            <Typography className={classes.subdetails}> Name:</Typography>
+                            <Typography > {values.suffix === 'undefined'? values.lastName +", "+ values.firstName +" "+values.middleName:values.lastName +" "+values.suffix+", "+ values.firstName +" "+values.middleName}</Typography>
+                            <Typography className={classes.subdetails}>Contact Number:</Typography>
+                            <Typography >{values.contactNumber}</Typography>
+                            <Typography className={classes.subdetails}>Email Address:</Typography>
+                            <Typography >{values.email}</Typography>
                         </Grid>
                         <Grid item xs={12} >
-                            <Typography>Appointment Details</Typography>
+                            <div className={classes.division}>
+                            <Typography className={classes.details}>Appointment Details</Typography>
+                            </div>
                         </Grid>
                         <Grid item xs={12} >
-                             <Typography>Concern</Typography>
-                             <Typography>{values.concerns}</Typography>
-                            <Typography>Type of Consultation</Typography>
-                            <Typography>{values.concernType}</Typography>
-                            <Typography>Appointment Date:</Typography>
+                             <Typography className={classes.subdetails}>Concern</Typography>
+                             <Typography >{values.concerns}</Typography>
+                            <Typography className={classes.subdetails}>Type of Consultation</Typography>
+                            <Typography >{values.concernType}</Typography>
+                            <Typography className={classes.subdetails}>Appointment Date:</Typography>
                             <Typography>{moment(values.dataAndTime).format('D MMM YYYY')}</Typography>
-                            <Typography>Appointment Time:</Typography>
-                            <Typography>{moment(values.dataAndTime).format('h:mm a')}</Typography>
+                            <Typography className={classes.subdetails}>Appointment Time:</Typography>
+                            <Typography >{moment(values.dataAndTime).format('h:mm a')}</Typography>
                         </Grid>
                         <Grid item xs={12}>
-                            <Typography>Doctor's Confirmation Status:</Typography>
-                            <Typography>{values.doctorsStatus}</Typography>
+                            <Typography className={classes.subdetails}>Doctor's Confirmation Status:</Typography>
+                            <Typography >{values.doctorsStatus}</Typography>
                         </Grid>
                     </Grid>
                     <DialogActions>
@@ -114,5 +119,20 @@ const useStyles = makeStyles((theme) => ({
     submit: {
         margin: theme.spacing(2, 1, 2),
       },
+
+    details: {
+        textAlign: "center",
+        fontSize: "25px",
+        fontWeight: "bold",
+    },
+
+    division: {
+        borderBottom: "3px solid red"
+    },
+
+    subdetails: {
+        fontWeight: "bold",
+    },
+
   }));
 export default ApprovedAppointments

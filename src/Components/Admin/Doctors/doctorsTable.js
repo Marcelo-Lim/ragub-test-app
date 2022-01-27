@@ -23,14 +23,14 @@ const DoctorsTable =()=>{
             title: "Email", field:"email" 
         },
         {
-            title: "Contact Number", field:"email" 
+            title: "Contact Number", field:"contactNumber" 
         },
         {
             title: "Specialization", field:"doctorsSpeciality" 
         },
        ]
        useEffect(()=>{
-        fetch("http://localhost:5000/doctor/doctors/data")
+        fetch("https://sdmc-clinic.herokuapp.com/doctor/doctors/data")
         .then(resp => resp.json())
         .then(resp => setData(resp))
     })

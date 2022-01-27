@@ -20,18 +20,18 @@ const Appointments =() =>{
         <Container component="main" maxWidth="lg">
             <Paper className={classes.paper}>
                 <Paper className={classes.paper1} elevation={0}>
-                    <Typography component="h1" variant="h5">Appointments</Typography>
+                    <Typography component="h1" variant="h5" className={classes.appointments}>Appointment Report</Typography>
 
                    
                 </Paper>
-
+                      <Typography component="h1" variant="h5" className={classes.appointmentdetails}> Pending Appointments</Typography>
                       <PendingAppointments/>
                       <Paper className={classes.paper1} elevation={0}>
-                        <Typography component="h1" variant="h5">Appointments</Typography>
+                        <Typography component="h1" variant="h5" className={classes.appointmentdetails}> Approved Appointments</Typography>
                      </Paper>
                       <ApprovedAppointments/>
                       <Paper className={classes.paper1} elevation={0}>
-                        <Typography component="h1" variant="h5">Appointments</Typography>
+                        <Typography component="h1" variant="h5" className={classes.appointmentdetails}>Cancelled Appointments</Typography>
                      </Paper>
                          <CancelledAppointments/>
             
@@ -86,5 +86,18 @@ const useStyles = makeStyles((theme) => ({
     googleButton: {
       marginBottom: theme.spacing(2),
     },
+
+    appointments: {
+      fontSize: "35px",
+      fontWeight: "bold",
+    },
+
+    appointmentdetails: {
+      fontSize: "25px",
+      fontWeight: "bold",
+      marginTop: theme.spacing(2),
+      marginBottom: theme.spacing(2),
+    }
+
   }));
 export default Appointments;

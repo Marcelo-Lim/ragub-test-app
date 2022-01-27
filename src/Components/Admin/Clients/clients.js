@@ -13,7 +13,7 @@ const ClientsHome =() =>{
     return(
         <Container component="main" maxWidth="lg">
            <Paper className={classes.paper} elevation={0}>
-                <Typography component="h1" variant="h5">Clients Informations</Typography>
+                <Typography component="h1" variant="h5" className={classes.clients}>Clients Informations</Typography>
            </Paper>
            <ClientsTB/>
         </Container>
@@ -58,6 +58,12 @@ const useStyles = makeStyles((theme) => ({
     googleButton: {
       marginBottom: theme.spacing(2),
     },
+
+    clients: {
+      fontSize: "35px",
+        fontWeight: "bold",
+    }
+
   }));
 
 export default ClientsHome

@@ -18,7 +18,7 @@ const options = ['Allergists/Immunologists','Anesthesiologists',
 const Doctors =()=>{
     const [open,setOpen] = useState(false);
     const dispatch = useDispatch();
-    const numberId = 10000000;
+    const numberId = 100000002;
     const initialState={
         StaffId: '',
         firstName:'',
@@ -52,15 +52,17 @@ const Doctors =()=>{
         <div>
         <Container component="main" maxWidth="lg">
            <Paper className={classes.paper} elevation={0}>
-                <Typography component="h1" variant="h5">Doctors Information</Typography>
-                <Button variant="contained" color="primary" onClick={handleClickedOpen} >Add Doctors</Button>
+                <Typography component="h1" variant="h5" className={classes.doctor}>Doctors Information</Typography>
+                <Button variant="contained" color="primary" onClick={handleClickedOpen} className={classes.adddoctorbtn}> Add Doctors </Button>
            </Paper>
            <DoctorTable/>
         </Container>
         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <Container component ="main" maxWidth="lg">
             <DialogTitle>
-                <Typography component="h1" variant="h5">Add Doctors</Typography>
+                <div className={classes.division}>
+                <Typography component="h1" variant="h5" className={classes.adddoctor}>Add Doctors</Typography>
+                </div>
             </DialogTitle>
             <form onSubmit={handleSubmit}>
             <Grid container spacing={3}>
@@ -199,5 +201,27 @@ const useStyles = makeStyles((theme) => ({
     googleButton: {
       marginBottom: theme.spacing(2),
     },
+
+    adddoctorbtn: {
+        marginTop: theme.spacing(3),
+        marginBottom: theme.spacing(2),
+        width: "20%",
+    },
+
+    adddoctor: {
+        textAlign: "center",
+        fontSize: "25px",
+        fontWeight: "bold",
+    },
+
+    doctor: {
+        fontSize: "35px",
+        fontWeight: "bold",
+    },
+
+    division: {
+        borderBottom: "3px solid red"
+    },
+
   }));
 export default Doctors;
