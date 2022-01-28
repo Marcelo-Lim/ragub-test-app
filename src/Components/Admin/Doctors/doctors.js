@@ -17,8 +17,10 @@ const options = ['Allergists/Immunologists','Anesthesiologists',
 'Internists',''];
 const Doctors =()=>{
     const [open,setOpen] = useState(false);
+    const [data,setData] =useState([])
     const dispatch = useDispatch();
     const numberId = 10000000;
+    const count = data.length;
     const initialState={
         StaffId: '',
         firstName:'',
@@ -35,18 +37,23 @@ const Doctors =()=>{
     const classes = useStyles();
     const handleClickedOpen=()=>{
         setOpen(true);
-        setValues(values.StaffId=numberId);
+        setValues(values.StaffId=numberId+count);
     }
     const handleClose=()=>{
         setOpen(false);
     }
     const handleSubmit=(e)=>{
         e.preventDefault();
-        setValues(values.StaffId=numberId.toString());
+        setValues(values.StaffId=(numberId+count).toString());
         dispatch(newDoctorData(values))
         console.log(values.StaffId);
         setOpen(false);
     }
+    useEffect(()=>{
+        fetch("http://localhost:5000/doctor/doctors/data")
+        .then(resp => resp.json())
+        .then(resp => setData(resp))
+    })
     const handleChange = (e) => setValues({ ...values, [e.target.name]: e.target.value });
     return(
         <div>
@@ -65,7 +72,7 @@ const Doctors =()=>{
             <form onSubmit={handleSubmit}>
             <Grid container spacing={3}>
             <Grid item xs={12}>
-                <Typography className={classes.numberid}>Employee Number: {numberId} </Typography>
+                <Typography className={classes.numberid}>Employee Number: {numberId+count} </Typography>
                 </Grid>
                 <Grid item xs={12}> 
                     <TextField  name="lastName" label="Last Name" 
