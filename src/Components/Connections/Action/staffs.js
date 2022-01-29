@@ -42,6 +42,7 @@ export const deleteDeduction = (id) => async (dispatch) => {
       const {data} = await api.updateStaffInfo(id,dats);
       dispatch({type: UPDATE,payload:data})
       console.log('Updates');
+      
     } catch (error) {
       console.log(error);
     }

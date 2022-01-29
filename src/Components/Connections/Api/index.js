@@ -20,4 +20,5 @@ API.interceptors.request.use((req) => {
 
 
   export const newDoctorData = (newDoctor) => API.post('/doctor/newDoctor', newDoctor);
+  export const updateDoctorStats =(id,stas) => API.patch(`/doctor/${id}/doctorstatus/updating`,stas)
   export const deleteDoctorData =(id)=> API.delete(`/doctor/${id}/remove`);

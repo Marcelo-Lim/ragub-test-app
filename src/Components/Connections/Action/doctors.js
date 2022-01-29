@@ -14,6 +14,17 @@ export const newDoctorData = (newDatas, navigate) => async (dispatch) =>{
         
     }
 }
+export const updateDoctorStat =(id,stats)=> async (dispatch)=>{
+  try{
+    const {data} = await api.updateDoctorStats(id,stats)
+    dispatch({type: 'UPDATE',payload:data})
+    console.log('Napalitan ko n ata status')
+    alert('Pag ganito')
+
+  }catch(error){
+    console.log(error.message);
+  }
+}
 export const deleteDoctor = (id) => async (dispatch) => {
     try {
       await api.deleteDoctorData(id);
@@ -24,3 +35,14 @@ export const deleteDoctor = (id) => async (dispatch) => {
       console.log(error);
     }
   };
+  // export const updateDoctorStat =(id,stats)=> async (dispatch)=>{
+  //   try{
+  //     const {data} = await api.updateDoctorStats(id,stats)
+  //     dispatch({type: 'UPDATE',payload:data})
+  //     console.log('Napalitan ko n ata status')
+  //     alert('Pag ganito')
+  
+  //   }catch(error){
+  //     console.log(error.message);
+  //   }
+  // }

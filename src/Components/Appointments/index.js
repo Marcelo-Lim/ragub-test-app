@@ -31,7 +31,7 @@ const CustomRow = (props) => {
                         <IconButton title="Approve Appointment" onClick={()=>props.handleOpenEmail(props.data)}>
                         <BeenhereTwoToneIcon/>
                         </IconButton>
-                        <IconButton title="View Appointment" onClick={()=>props.handleOpenView(props.data)}>
+                        <IconButton title="View Appointment" onClick={()=>props.HandleOpenView(props.data)}>
                         <PreviewIcon/>
                         </IconButton>
                        

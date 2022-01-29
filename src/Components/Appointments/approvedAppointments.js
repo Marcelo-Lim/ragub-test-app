@@ -70,7 +70,7 @@ const ApprovedAppointments =() =>{
 
                 <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                     <Container component="main" maxWidth='lg'>
-                        <DialogTitle>
+                    <DialogTitle>
                             <div className={classes.division}>
                             <Typography className={classes.details}>Approved Appointment Details</Typography>
                             </div>
@@ -119,8 +119,7 @@ const useStyles = makeStyles((theme) => ({
     submit: {
         margin: theme.spacing(2, 1, 2),
       },
-
-    details: {
+      details: {
         textAlign: "center",
         fontSize: "25px",
         fontWeight: "bold",
@@ -133,6 +132,5 @@ const useStyles = makeStyles((theme) => ({
     subdetails: {
         fontWeight: "bold",
     },
-
   }));
 export default ApprovedAppointments
