@@ -62,7 +62,7 @@ const DoctorsTable =()=>{
         },
        ]
        useEffect(()=>{
-        fetch("http://localhost:5000/doctor/doctors/data")
+        fetch("https://sdmc-clinic.herokuapp.com/doctor/doctors/data")
         .then(resp => resp.json())
         .then(resp => setData(resp))
     })

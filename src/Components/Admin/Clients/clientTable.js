@@ -39,7 +39,7 @@ const ClientsTB = () =>{
         }]
 
         useEffect(()=>{
-            fetch("http://localhost:5000/user/info")
+            fetch("https://sdmc-clinic.herokuapp.com/user/info")
             .then(resp => resp.json())
             .then(resp => setData(resp))
         })

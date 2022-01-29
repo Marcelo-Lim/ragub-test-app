@@ -4,6 +4,7 @@ import tableIcons from '../MaterialTable/MaterialTableIcons';
 import CustomRow from './index'
 import { useDispatch } from "react-redux";
 import moment from 'moment';
+import emailjs from 'emailjs-com';
 import { Typography, makeStyles,Button,
     Paper, Container, Grid,IconButton,InputAdornment, Card, 
     CircularProgress,CardContent, CardActionArea,
@@ -27,7 +28,8 @@ const PendingAppointments =() =>{
     const [openPreviewDetails, setOpenPreviewDetails] = useState(false)
     const initialState={
         doctorsName:'',
-        doctorsIdNumber:''
+        doctorsIdNumber:'',
+        dateAndTime: ''
 
     }
     const handleChange = (e) => setValues({ ...values, [e.target.name]: e.target.value });
@@ -63,7 +65,7 @@ const PendingAppointments =() =>{
         }
     ]
     useEffect(()=>{
-        fetch("http://localhost:5000/appointment/appointmentsss")
+        fetch("https://sdmc-clinic.herokuapp.com/appointment/appointmentsss")
         .then(resp => resp.json())
         .then(resp => setData(resp))
     })
@@ -72,7 +74,7 @@ const PendingAppointments =() =>{
     },[data])
 
     useEffect(()=>{
-        fetch("http://localhost:5000/doctor/doctors/data")
+        fetch("https://sdmc-clinic.herokuapp.com/doctor/doctors/data")
         .then(resp => resp.json())
         .then(resp => setDrops(resp))
     })
@@ -94,9 +96,10 @@ const PendingAppointments =() =>{
         dispatch(doctorForAppointment(values._id,{...values}))
         setOpen(false);
     }
-    const handleSendEmail =(data)=>{
-        setValues(data);
-        console.log(values)
+    const handleSendEmail =()=>{
+        setValues(values.dateAndTime = new Date(values.dateAndTime));
+        console.log(values.dateAndTime)
+        emailjs.send('service_vdtmbb6', 'template_mbwqyzp', values, 'user_Pja1vFlc7jtiv7rvHzl6w')
     }
     const handleOpenEmail=(data)=>{
         if(data.doctorsStatus === 'Approved'){
@@ -207,7 +210,7 @@ const PendingAppointments =() =>{
                     <Typography>This appointment is already approved.</Typography>
                     <Typography>Please notify the patient for this appointment</Typography>
                     <DialogActions>
-                    <Button variant="contained" color="primary" onClick={handleCloseEmail}>Close</Button>
+                    <Button variant="contained" color="primary" onClick={handleSendEmail}>Send Email</Button>
                 </DialogActions>
                 </DialogContent>
             </Dialog>
