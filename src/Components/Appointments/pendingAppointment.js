@@ -29,7 +29,8 @@ const PendingAppointments =() =>{
     const initialState={
         doctorsName:'',
         doctorsIdNumber:'',
-        dateAndTime: new Date(),
+        dates: new Date(),
+        timess: new Date(),
         lastName:'',
         firstName:'',
         email:''
@@ -89,9 +90,9 @@ const PendingAppointments =() =>{
         .then(resp => setDrops(resp))
     })
     const handleOpen=(data)=>{
-       setValues(data)
-       console.log(values)
-       setOpen(true)
+        setValues(data)
+        console.log(values)
+        setOpen(true)
 
             
     }
@@ -115,20 +116,17 @@ const PendingAppointments =() =>{
     const handleOpenEmail=(data)=>{
         if(data.doctorsStatus === 'Approved'){
             setOpenSendEmail(true);
+            let dtFormat = new Intl.DateTimeFormat('en-US',{
+                hour: 'numeric',
+                minute: 'numeric'
+            })
             setValues({ firstName: data.firstName,
             lastName: data.lastName,
-            dateAndTime: data.dateAndTime.split("T")[0],
+            dates: data.dateAndTime.split("T")[0],
+            // timess: moment(data.dateAndTime).format('h:mm a'),
             email: data.email})
             console.log(data)
         }
-        else if(data.doctorsStatus === 'Pending'){
-            setOpenPending(true);
-            setValues(data)
-        }
-        else{
-            setOpenPendingStats(true);
-        }
-       
     }
     const handleCloseEmail=()=>{
         setOpenPendingStats(false);
