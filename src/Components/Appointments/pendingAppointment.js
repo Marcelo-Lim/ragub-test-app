@@ -29,7 +29,11 @@ const PendingAppointments =() =>{
     const initialState={
         doctorsName:'',
         doctorsIdNumber:'',
-        dateAndTime: ''
+        dateAndTime: new Date(),
+        lastName:'',
+        firstName:'',
+        email:''
+       
 
     }
     const handleChange = (e) => setValues({ ...values, [e.target.name]: e.target.value });
@@ -37,6 +41,12 @@ const PendingAppointments =() =>{
    const [values,setValues] = useState(initialState)
     const [open,setOpen] = useState(false);
 
+  
+    // const [val,setVal]= useState({
+    //     firstName:'',
+    //     lastName:'',
+    //     dateAndTime: new Date()
+    // })
     const columns=[ 
         {
             title: "Patient Name", field: "firstName"
@@ -79,11 +89,11 @@ const PendingAppointments =() =>{
         .then(resp => setDrops(resp))
     })
     const handleOpen=(data)=>{
-        // if(data.doctorsName === ''){
-            setOpen(true);
-            setValues(data)
-            console.log(data)
-     
+       setValues(data)
+       console.log(values)
+       setOpen(true)
+
+            
     }
 
     const handleClose=()=>{
@@ -97,14 +107,18 @@ const PendingAppointments =() =>{
         setOpen(false);
     }
     const handleSendEmail =()=>{
-        setValues(values.dateAndTime = new Date(values.dateAndTime));
-        console.log(values.dateAndTime)
+        // setValues();
+        console.log(values)
         emailjs.send('service_vdtmbb6', 'template_mbwqyzp', values, 'user_Pja1vFlc7jtiv7rvHzl6w')
+       
     }
     const handleOpenEmail=(data)=>{
         if(data.doctorsStatus === 'Approved'){
             setOpenSendEmail(true);
-            setValues(data)
+            setValues({ firstName: data.firstName,
+            lastName: data.lastName,
+            dateAndTime: data.dateAndTime.split("T")[0],
+            email: data.email})
             console.log(data)
         }
         else if(data.doctorsStatus === 'Pending'){
