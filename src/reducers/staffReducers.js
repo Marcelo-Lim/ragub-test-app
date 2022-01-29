@@ -1,4 +1,4 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE } from '../constant';
+import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE,UPDATETIME } from '../constant';
 
 export default (staffReducers = [], action) => {
   switch (action.type) {
@@ -12,7 +12,9 @@ export default (staffReducers = [], action) => {
       return staffReducers.map((staff) => (staff._id === action.payload._id ? action.payload : staff));
     case DELETE:
       return staffReducers.filter((staff) => staff._id !== action.payload);
+    case UPDATETIME:
+  
     default:
       return staffReducers;
   }
-};
+}; 

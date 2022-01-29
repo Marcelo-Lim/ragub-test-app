@@ -16,14 +16,19 @@ const PendingAppointments =() =>{
     const classes = useStyles()
     const dispatch = useDispatch()
     const [data,setData] = useState([]);
+    const [datatwo,setDatatwo]= useState([])
     const [openSendEmail,setOpenSendEmail] = useState(false)
     const [openAnother, setOpenAnother]= useState(false);
     const [openPendingStats, setOpenPendingStats] = useState(false)
+    const [dx,setDxs]= useState([])
     const [drops,setDrops] = useState([]);
     const [filteredData,setFilteredData]=useState(data)
+    const [openPending,setOpenPending]= useState(false)
     const [openPreviewDetails, setOpenPreviewDetails] = useState(false)
     const initialState={
-        doctorsName:''
+        doctorsName:'',
+        doctorsIdNumber:''
+
     }
     const handleChange = (e) => setValues({ ...values, [e.target.name]: e.target.value });
     
@@ -37,10 +42,9 @@ const PendingAppointments =() =>{
         {
             title: "Patient Name", field: "lastName"
         },
-        // {
-        //     title: "Patient Name", field: "email"
-        // },
-       
+        {
+            title: "Concern", field: "concerns",
+        },
         {
             title: "Date", field: "dateAndTime", type: 'date'
         },
@@ -49,9 +53,6 @@ const PendingAppointments =() =>{
         },
         {
             title: "Status", field:"appointmentStatus"
-        },
-        {
-            title: "Doctor's Name", field:"doctorsName"
         },
         {
             title: "Doctor's Approval", field:"doctorsStatus"
@@ -80,15 +81,9 @@ const PendingAppointments =() =>{
             setOpen(true);
             setValues(data)
             console.log(data)
-          
-        // }
-        // else{
-        //     setOpenAnother(true);
-        //     setValues(data)
-        //     console.log(data)
-        // }
-       
+     
     }
+
     const handleClose=()=>{
         setOpen(false);
         setOpenAnother(false);
@@ -97,30 +92,36 @@ const PendingAppointments =() =>{
         e.preventDefault();
         console.log(values);
         dispatch(doctorForAppointment(values._id,{...values}))
+        setOpen(false);
     }
     const handleSendEmail =(data)=>{
         setValues(data);
         console.log(values)
     }
     const handleOpenEmail=(data)=>{
-        if(data.doctorsStatus !== 'Approved'){
-            setOpenPendingStats(true);
+        if(data.doctorsStatus === 'Approved'){
+            setOpenSendEmail(true);
             setValues(data)
             console.log(data)
         }
+        else if(data.doctorsStatus === 'Pending'){
+            setOpenPending(true);
+            setValues(data)
+        }
         else{
-            setOpenSendEmail(true);
-           
+            setOpenPendingStats(true);
         }
        
     }
     const handleCloseEmail=()=>{
         setOpenPendingStats(false);
         setOpenSendEmail(false);
+        setOpenPending(false)
     }
-    const handleOpenView =(data)=>{
+    const HandleOpenView =(data)=>{
         setOpenPreviewDetails(true);
         setValues(data);
+        
     }
     const handleCloseView=()=>{
         setOpenPreviewDetails(false);
@@ -135,7 +136,7 @@ const PendingAppointments =() =>{
                 data={filteredData}
                 columns={columns}
                 components={{
-                Row: props => <CustomRow {...props} handleOpen={handleOpen} handleOpenEmail={handleOpenEmail} handleOpenView={handleOpenView}/>
+                Row: props => <CustomRow {...props} handleOpen={handleOpen} handleOpenEmail={handleOpenEmail} HandleOpenView={HandleOpenView}/>
                 }} 
              />
      
@@ -158,10 +159,13 @@ const PendingAppointments =() =>{
                                 name="doctorsName"
                                 value={values.doctorsName}
                                 onChange={handleChange}
+                                
                                 >
                                 {drops.map((datas)=>(
-                                    <MenuItem key={datas._id} value={datas.suffix===undefined? datas.lastName+"," +" "+ datas.firstName +" "+ datas.middleName: datas.lastName +" "+datas.suffix+", "+ datas.firstName +" "+ datas.middleName}>
+                                    <MenuItem key={datas._id} value={datas._id}>
+                                      {/* value={datas.suffix===undefined? datas.lastName+"," +" "+ datas.firstName +" "+ datas.middleName: datas.lastName +" "+datas.suffix+", "+ datas.firstName +" "+ datas.middleName}> */}
                                         <Grid container>
+                                            {/* {setValues.doctorsIdNumber=datas._id} */}
                                             <Grid item xs={12}>
                                            Name:<h5> {datas.lastName} {datas.suffix}, {datas.firstName} {datas.middleName} </h5>
                                             </Grid>
@@ -169,10 +173,14 @@ const PendingAppointments =() =>{
                                             Specialization: <h5> {datas.doctorsSpeciality}</h5> 
                                             </Grid>
                                         </Grid>
+                                        {/* {setValues(values.doctorsIdNumber === datas._id)} */}
                                     </MenuItem>
-                                   
+                                  
                                 ))}
                                 </TextField>
+                                 </Grid>
+                                 <Grid>
+                                    <h1> {datatwo.firstName}</h1>
                                  </Grid>
                 </Grid>
               
@@ -181,26 +189,35 @@ const PendingAppointments =() =>{
                     <Button variant="contained" color="secondary" className={classes.submit} onClick={handleClose}>Cancel</Button>
                 </Grid>
                 </Container>
-              
-        
             </Dialog>
-              
-            {/* <Dialog open={openAnother} onClose={handleClose} aria-labelledby="form-dialog-title">
-                    <DialogTitle>Doctors</DialogTitle>
-                    <DialogContent>Already choosed a doctor for the appointment</DialogContent>
-                    <DialogContent>Please wait for the doctor's confirmation</DialogContent>
-                </Dialog> */}
 
-            <Dialog open={openSendEmail} onClose={handleCloseEmail} aria-labelledby="form-dialog-title">
+            <Dialog open={openPending} onClose={handleCloseEmail} aria-labelledby="form-dialog-title">
                 <DialogTitle>Sending Email</DialogTitle>
-            </Dialog>
-            <Dialog open={openPendingStats} onClose={handleCloseEmail} aria-labelledby="form-dialog-title">
-                <DialogTitle>Status is still pending</DialogTitle>
                 <DialogContent>
-                <Typography>Please be sure that the doctor you appointed, confirmed this appointment</Typography>
+                    <Typography>Please wait for the doctor to confirm the appointment</Typography>
                 </DialogContent>
                 <DialogActions>
                     <Button variant="contained" color="primary" onClick={handleCloseEmail}>Close</Button>
+                </DialogActions>
+            </Dialog>
+
+            <Dialog open={openSendEmail} onClose={handleCloseEmail} aria-labelledby="form-dialog-title">
+                <DialogTitle>Sending Email</DialogTitle>
+                <DialogContent>
+                    <Typography>This appointment is already approved.</Typography>
+                    <Typography>Please notify the patient for this appointment</Typography>
+                    <DialogActions>
+                    <Button variant="contained" color="primary" onClick={handleCloseEmail}>Close</Button>
+                </DialogActions>
+                </DialogContent>
+            </Dialog>
+            <Dialog open={openPendingStats} onClose={handleCloseEmail} aria-labelledby="form-dialog-title">
+                <DialogTitle>Sending Email</DialogTitle>
+                <DialogContent>
+                <Typography>This appointment has been decline by the doctor</Typography>
+                </DialogContent>
+                <DialogActions>
+                    <Button variant="contained" color="primary" onClick={handleCloseEmail}>Decline</Button>
                 </DialogActions>
             </Dialog>
 
@@ -230,9 +247,21 @@ const PendingAppointments =() =>{
                             <Typography>Type of Consultation</Typography>
                             <Typography>{values.concernType}</Typography>
                             <Typography>Appointment Date:</Typography>
-                            <Typography>{moment(values.dataAndTime).format('D MMM YYYY')}</Typography>
+                            <Typography>{moment(values.dateAndTime).format('D MMM YYYY')}</Typography>
                             <Typography>Appointment Time:</Typography>
-                            <Typography>{moment(values.dataAndTime).format('h:mm a')}</Typography>
+                            <Typography>{moment(values.dateAndTime).format('h:mm a')}</Typography>
+                        </Grid>
+                        <Grid item xs={12}>
+                        <Typography>Doctor's Name:</Typography>
+                        {drops.map((doctors)=>(
+                            <Grid key={doctors._id} item xs={12}>
+                                
+                                {values.doctorsName === doctors._id?(
+                                    <Typography>{doctors.suffix===undefined? doctors.lastName+"," +" "+ doctors.firstName +" "+ doctors.middleName: doctors.lastName +" "+doctors.suffix+", "+ doctors.firstName +" "+ doctors.middleName}</Typography>
+                                ):null
+                                }
+                            </Grid>
+                        ))}
                         </Grid>
                         <Grid item xs={12}>
                             <Typography>Doctor's Confirmation Status:</Typography>
