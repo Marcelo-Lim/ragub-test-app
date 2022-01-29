@@ -98,9 +98,9 @@ const ApprovedAppointments =() =>{
                             <Typography className={classes.subdetails}>Type of Consultation</Typography>
                             <Typography >{values.concernType}</Typography>
                             <Typography className={classes.subdetails}>Appointment Date:</Typography>
-                            <Typography>{moment(values.dataAndTime).format('D MMM YYYY')}</Typography>
+                            <Typography>{moment(values.dateAndTime).format('D MMM YYYY')}</Typography>
                             <Typography className={classes.subdetails}>Appointment Time:</Typography>
-                            <Typography >{moment(values.dataAndTime).format('h:mm a')}</Typography>
+                            <Typography >{moment(values.dateAndTime).format('h:mm a')}</Typography>
                         </Grid>
                         <Grid item xs={12}>
                             <Typography className={classes.subdetails}>Doctor's Confirmation Status:</Typography>
