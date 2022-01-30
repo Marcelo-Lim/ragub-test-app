@@ -16,7 +16,7 @@ const CustomRow = (props) => {
     const [show,setShow]=useState(true);
     const overlayStyle = { width: "100%", position: "absolute" }
     const [open,setOpen] = useState(false);
-	if(props.data.doctorsName ===''){
+	if(props.data.doctorsName === null){
     return(
         <Grid style={{ display: "contents" }} 
             onMouseOver={()=>setShow(true)}

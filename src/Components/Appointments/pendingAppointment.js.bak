@@ -152,7 +152,7 @@ const PendingAppointments =() =>{
                 title="Pending Appoinments"
                 data={filteredData}
                 columns={columns}
-                /* localization={{
+                localization={{
                     toolbar:{
                         exportCSVName: "Download excel",
 						 exportPDFName: "Download pdf"
@@ -165,7 +165,7 @@ const PendingAppointments =() =>{
 						csv:true,
 						pdf:true
 					}
-				}} */
+				}}
                 components={{
                 Row: props => <CustomRow {...props} handleOpen={handleOpen} 
                 // handleOpenEmail={handleOpenEmail}

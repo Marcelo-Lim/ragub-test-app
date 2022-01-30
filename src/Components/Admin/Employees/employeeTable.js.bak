@@ -117,20 +117,6 @@ const Employees =() =>{
                 title="Information"
                 data={data}
                 columns={columns}
-				localization={{
-                    toolbar:{
-                        exportCSVName: "Download excel",
-						 exportPDFName: "Download pdf"
-                    }
-                }}
-				options={{
-					//search: false,
-					actionsColumnIndex: -1,
-					exportButton:{
-						csv:true,
-						pdf:true
-					}
-				}}
                 components={{
                     Row: props => <CustomRow {...props} handleClickedOpen={handleClickedOpen} handleClickedOpenDelete={handleClickedOpenDelete} handleClickedOpenView={handleClickedOpenView}/>
                   }}

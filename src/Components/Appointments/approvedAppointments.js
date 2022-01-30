@@ -10,23 +10,27 @@ import { Typography, makeStyles,Button,
     DialogTitle, TextField,FormControlLabel,MenuItem} from "@material-ui/core";
 
 const ApprovedAppointments =() =>{
-    const [data,setData] = useState([]);
+    const [data,setData] = useState([{
+		/* dateAndTime: new Date(),  */
+		firstName:''
+	}]); 
     const [open,setOpen] = useState(false);
-    const [filteredData,setFilteredData]=useState(data)
+	const [filteredData,setFilteredData]=useState({dats: data.dateAndTime.toLocaleString()})
+	
     const classes = useStyles()
-    const [values,setValues]= useState([])
+    const [values,setValues]= useState([]);
+	
     const columns=[ 
         {
             title: "Patient Name", field: "firstName"
         },
-        // {
-        //     title: "Email", field:"email"
-        // },
+      
         {
             title: "Contact Number", field: "contactNumber"
         },
         {
-            title: "Date", field: "dateAndTime", type: 'date'
+            title: "Date", field: "dateAndTime", 
+		
         },
         {
             title: "Time", field: "dateAndTime", type: 'time'
@@ -49,7 +53,9 @@ const ApprovedAppointments =() =>{
     },[data])
     const handleClickedOpen =(data)=>{
         setOpen(true);
+		console.log(data)
         setValues(data)
+		
     }
     const handleClose =()=>{
         setOpen(false);
@@ -61,6 +67,20 @@ const ApprovedAppointments =() =>{
                 title="Approved Appoinments"
                 data={filteredData}
                 columns={columns}
+				localization={{
+                    toolbar:{
+                        exportCSVName: "Download excel",
+						 exportPDFName: "Download pdf"
+                    }
+                }}
+				options={{
+					/* search: false, */
+					actionsColumnIndex: -1,
+					exportButton:{
+						csv:true,
+						pdf:true
+					}
+				}}
                 components={{
                 Row: props => <CustomRow {...props} handleClickedOpen={handleClickedOpen}/>
                 }}

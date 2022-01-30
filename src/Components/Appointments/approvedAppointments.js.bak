@@ -1,36 +1,36 @@
 import React,{useEffect,useState} from 'react';
 import MaterialTable from 'material-table';
+import moment from 'moment'
+import tableIcons from '../MaterialTable/MaterialTableIcons';
+import CustomRow from './index2'
 import { Typography, makeStyles,Button,
     Paper, Container, Grid,IconButton,InputAdornment, Card, 
     CircularProgress,CardContent, CardActionArea,
     Dialog,DialogActions,DialogContent,
     DialogTitle, TextField,FormControlLabel,MenuItem} from "@material-ui/core";
-import tableIcons from '../MaterialTable/MaterialTableIcons';
-import CustomRow from './index3'
-import moment from 'moment';
 
-const initialState={
-    dateAndTime:''
-}
-const CancelledAppointments =() =>{
-    const classes = useStyles()
-    const [data,setData] = useState([{dateAndTime: new Date()}]);
-    const [filteredData,setFilteredData]=useState(data)
-    const [values,setValues]= useState(initialState);
+const ApprovedAppointments =() =>{
+    const [data,setData] = useState([{
+		/* dateAndTime: new Date(),  */
+		firstName:''
+	}]); 
     const [open,setOpen] = useState(false);
-    
+	const [filteredData,setFilteredData]=useState({dats: data.dateAndTime.toLocaleString(DateTime.DATE_SHORT)})
+	
+    const classes = useStyles()
+    const [values,setValues]= useState([]);
+	
     const columns=[ 
         {
             title: "Patient Name", field: "firstName"
         },
-        {
-            title: "Email", field:"email"
-        },
+      
         {
             title: "Contact Number", field: "contactNumber"
         },
         {
-            title: "Date", field: "dateAndTime", type: 'date'
+            title: "Date", field: "dateAndTime", 
+		
         },
         {
             title: "Time", field: "dateAndTime", type: 'time'
@@ -48,22 +48,23 @@ const CancelledAppointments =() =>{
         .then(resp => setData(resp))
     })
     useEffect(()=>{
-        setFilteredData(data.filter(d=>d.appointmentStatus === 'Cancelled' ));
+        setFilteredData(data.filter(d=>d.appointmentStatus === 'Approved' ));
         
     },[data])
-    const handleOpen =(data)=>{
+    const handleClickedOpen =(data)=>{
         setOpen(true);
+		console.log(data)
         setValues(data)
-        setValues(values.dateAndTime = data.dateAndTime)
+		
     }
     const handleClose =()=>{
-        setOpen(false)
+        setOpen(false);
     }
     return (
-        <Container component="main" maxWidth='lg'>
+        <Container component="main" maxWidth='xl'>
              <MaterialTable 
             icons={tableIcons}
-                title="Cancelled Appoinments"
+                title="Approved Appoinments"
                 data={filteredData}
                 columns={columns}
 				localization={{
@@ -73,7 +74,7 @@ const CancelledAppointments =() =>{
                     }
                 }}
 				options={{
-					search: false,
+					/* search: false, */
 					actionsColumnIndex: -1,
 					exportButton:{
 						csv:true,
@@ -81,11 +82,13 @@ const CancelledAppointments =() =>{
 					}
 				}}
                 components={{
-                Row: props => <CustomRow {...props} handleOpen={handleOpen}/>
-                }} 
+                Row: props => <CustomRow {...props} handleClickedOpen={handleClickedOpen}/>
+                }}
+
         />
 
-        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+
+                <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                     <Container component="main" maxWidth='lg'>
                     <DialogTitle>
                             <div className={classes.division}>
@@ -150,4 +153,4 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: "bold",
     },
   }));
-export default CancelledAppointments
+export default ApprovedAppointments
