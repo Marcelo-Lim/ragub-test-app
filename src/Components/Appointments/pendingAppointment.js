@@ -11,11 +11,12 @@ import { Typography, makeStyles,Button,
     Dialog,DialogActions,DialogContent,
     DialogTitle, TextField,FormControlLabel,MenuItem} from "@material-ui/core";
 import Autocomplete from '@mui/material/Autocomplete';
-import {doctorForAppointment} from '../Connections/Action/appointments'
+import {doctorForAppointment,cancelAppointment} from '../Connections/Action/appointments'
 
 const PendingAppointments =() =>{
     const classes = useStyles()
     const dispatch = useDispatch()
+    const [stat,setStat] = useState({appointmentStatus : 'Approved'})
     const [data,setData] = useState([]);
     const [datatwo,setDatatwo]= useState([])
     const [openSendEmail,setOpenSendEmail] = useState(false)
@@ -37,7 +38,7 @@ const PendingAppointments =() =>{
     }
     const handleChange = (e) => setValues({ ...values, [e.target.name]: e.target.value });
     
-   const [values,setValues] = useState(initialState)
+    const [values,setValues] = useState(initialState)
     const [open,setOpen] = useState(false);
 
   
@@ -88,9 +89,9 @@ const PendingAppointments =() =>{
         .then(resp => setDrops(resp))
     })
     const handleOpen=(data)=>{
-       setValues(data)
-       console.log(values)
-       setOpen(true)
+        setValues(data)
+        console.log(values)
+        setOpen(true)
 
             
     }
@@ -108,17 +109,29 @@ const PendingAppointments =() =>{
     const handleSendEmail =()=>{
         // setValues();
         console.log(values)
-        emailjs.send('service_vdtmbb6', 'template_mbwqyzp', values, 'user_Pja1vFlc7jtiv7rvHzl6w')
-       
+        // emailjs.send('service_vdtmbb6', 'template_mbwqyzp', values, 'user_Pja1vFlc7jtiv7rvHzl6w')
+        dispatch(cancelAppointment(values._id,{...stat}))
+        setOpenSendEmail(false)
     }
     const handleOpenEmail=(data)=>{
         if(data.doctorsStatus === 'Approved'){
             setOpenSendEmail(true);
+<<<<<<< HEAD
+            let dtFormat = new Intl.DateTimeFormat('en-US',{
+                hour: 'numeric',
+                minute: 'numeric'
+            })
+            setValues({ firstName: data.firstName,
+            lastName: data.lastName,
+            dates: data.dateAndTime.split("T")[0],
+            // timess: moment(data.dateAndTime).format('h:mm a'),
+=======
             
             setValues({ firstName: data.firstName,
             lastName: data.lastName,
             dates: moment(data.dateAndTime).format('D MMM YYYY'),
             timess: moment(data.dateAndTime).format('h:mm a'),
+>>>>>>> 05888c68e28b83d853520f2380c28ee8d74bb8a9
             email: data.email})
             console.log(data)
         }
