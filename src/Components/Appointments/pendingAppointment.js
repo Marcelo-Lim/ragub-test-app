@@ -116,22 +116,11 @@ const PendingAppointments =() =>{
     const handleOpenEmail=(data)=>{
         if(data.doctorsStatus === 'Approved'){
             setOpenSendEmail(true);
-<<<<<<< HEAD
-            let dtFormat = new Intl.DateTimeFormat('en-US',{
-                hour: 'numeric',
-                minute: 'numeric'
-            })
-            setValues({ firstName: data.firstName,
-            lastName: data.lastName,
-            dates: data.dateAndTime.split("T")[0],
-            // timess: moment(data.dateAndTime).format('h:mm a'),
-=======
             
             setValues({ firstName: data.firstName,
             lastName: data.lastName,
             dates: moment(data.dateAndTime).format('D MMM YYYY'),
             timess: moment(data.dateAndTime).format('h:mm a'),
->>>>>>> 05888c68e28b83d853520f2380c28ee8d74bb8a9
             email: data.email})
             console.log(data)
         }
