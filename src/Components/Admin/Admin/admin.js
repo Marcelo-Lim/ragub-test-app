@@ -7,6 +7,28 @@ import { Typography, makeStyles,Button,
 
 const Admin =() =>{
     const classes = useStyles();
+    const [user,setUser] = useState(JSON.parse(localStorage.getItem('profile')))
+    const [values,setValues]=useState([])
+    const [data,setData] =useState([])
+    const [open,setOpen]= useState(false)
+
+    const handleOpen=(data)=>{
+      setOpen(true)
+      setValues(data)
+    }
+    const handleClose=()=>{
+      setOpen(false)
+    }
+
+    const handleChange = (e) => setValues({ ...values, [e.target.name]: e.target.value });
+
+    useEffect(function () {
+      fetch("https://sdmc-clinic.herokuapp.com/appointment/appointmentsss")
+      .then(resp=>resp.json())
+      .then(resp=>setData(resp)) 
+    })
+
+
     return(
         <Container component="main" maxWidth="xl" >
              <Paper className={classes.paper} elevation={0}>
@@ -14,21 +36,25 @@ const Admin =() =>{
                     <Grid item sm={3}>
                         <Paper className={classes.paper1}  elevation={4}>
                         <Typography component="h1" variant="h6">Appointments Today</Typography>
+                        <Typography component="h1" variant="h6"></Typography>
                         </Paper>
                     </Grid>
                     <Grid item sm={3}>
                         <Paper className={classes.paper1} elevation={4}>
                         <Typography component="h1" variant="h6">Pending Appointments</Typography>
+                        <Typography component="h1" variant="h6"></Typography>
                         </Paper>
                     </Grid>
                     <Grid item sm={3}>
                         <Paper className={classes.paper1} elevation={4}>
                         <Typography  component="h1" variant="h6">Available Doctors</Typography>
+                        <Typography component="h1" variant="h6"></Typography>
                         </Paper>
                     </Grid>
                     <Grid item sm={3}>
                         <Paper className={classes.paper1} elevation={4}>
                         <Typography component="h1" variant="h6">Number of Clients</Typography>
+                        <Typography component="h1" variant="h6"></Typography>
                         </Paper>
                     </Grid>
                 </Grid>

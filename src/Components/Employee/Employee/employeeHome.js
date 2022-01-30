@@ -1,8 +1,9 @@
 import React from 'react';
+import PendingAppointments from '../../../Components/Appointments/pendingAppointment';
 
 const EmployeeHome =() =>{
     return(
-        <h1>OO</h1>
+        <PendingAppointments />
     )
 }
 export default EmployeeHome
