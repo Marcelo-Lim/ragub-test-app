@@ -89,9 +89,9 @@ const PendingAppointments =() =>{
         .then(resp => setDrops(resp))
     })
     const handleOpen=(data)=>{
-       setValues(data)
-       console.log(values)
-       setOpen(true)
+        setValues(data)
+        console.log(values)
+        setOpen(true)
 
             
     }
@@ -241,27 +241,31 @@ const PendingAppointments =() =>{
             <Dialog open={openPreviewDetails} onClose={handleCloseView} aria-labelledby="form-dialog-title">
                 <Container component="main" maxWidth="md">
                 <DialogTitle>
-                    <Typography>Pending Details</Typography>
+                    <div className={classes.division}>
+                    <Typography className={classes.details}>Pending Details</Typography>
+                    </div>
                 </DialogTitle>
                     <Grid container spacing={2} justify="center">
                         <Grid item xs={12}>
-                            <Typography>Client Details</Typography>
+                            <Typography className={classes.subdetails}>Client Details</Typography>
                         </Grid>
                         <Grid item xs={12} >
-                            <Typography> Name:</Typography>
-                            <Typography> {values.suffix === 'undefined'? values.lastName +", "+ values.firstName +" "+values.middleName:values.lastName +" "+values.suffix+", "+ values.firstName +" "+values.middleName}</Typography>
-                            <Typography>Contact Number:</Typography>
-                            <Typography>{values.contactNumber}</Typography>
-                            <Typography>Email Address:</Typography>
-                            <Typography>{values.email}</Typography>
+                            <Typography className={classes.subdetails}> Name:</Typography>
+                            <Typography > {values.suffix === 'undefined'? values.lastName +", "+ values.firstName +" "+values.middleName:values.lastName +" "+values.suffix+", "+ values.firstName +" "+values.middleName}</Typography>
+                            <Typography className={classes.subdetails}>Contact Number:</Typography>
+                            <Typography >{values.contactNumber}</Typography>
+                            <Typography className={classes.subdetails}>Email Address:</Typography>
+                            <Typography >{values.email}</Typography>
                         </Grid>
                         <Grid item xs={12} >
-                            <Typography>Appointment Details</Typography>
+                            <div className={classes.division}>
+                            <Typography className={classes.details}>Appointment Details</Typography>
+                            </div>
                         </Grid>
                         <Grid item xs={12} >
-                             <Typography>Concern</Typography>
-                             <Typography>{values.concerns}</Typography>
-                            <Typography>Type of Consultation</Typography>
+                            <Typography className={classes.subdetails}>Concern:</Typography>
+                            <Typography >{values.concerns}</Typography>
+                            <Typography className={classes.subdetails}>Type of Consultation:</Typography>
                             <Typography>{values.concernType}</Typography>
                             <Typography>Appointment Date:</Typography>
                             <Typography>{moment(values.dateAndTime).format('D MMM YYYY')}</Typography>
@@ -281,7 +285,7 @@ const PendingAppointments =() =>{
                         ))}
                         </Grid>
                         <Grid item xs={12}>
-                            <Typography>Doctor's Confirmation Status:</Typography>
+                            <Typography className={classes.subdetails}>Doctor's Confirmation Status:</Typography>
                             <Typography>{values.doctorsStatus}</Typography>
                         </Grid>
                     </Grid>
@@ -299,5 +303,25 @@ const useStyles = makeStyles((theme) => ({
     submit: {
         margin: theme.spacing(2, 1, 2),
       },
+
+    details: {
+        textAlign: "center",
+        fontSize: "25px",
+        fontWeight: "bold",
+
+    },
+
+    division: {
+        borderBottom: "3px solid red",
+        
+    },
+
+    subdetails: {
+        fontWeight: "bold",
+        
+    },
+
+    
+
   }));
 export default PendingAppointments

@@ -55,7 +55,7 @@ const DoctorsTable =()=>{
             title: "Email", field:"email" 
         },
         {
-            title: "Contact Number", field:"email" 
+            title: "Contact Number", field:"contactNumber" 
         },
         {
             title: "Specialization", field:"doctorsSpeciality" 

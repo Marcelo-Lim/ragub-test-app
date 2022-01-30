@@ -61,8 +61,8 @@ const EmployeePanel = () =>{
         <div>
         <Container component="main" maxWidth="lg">
             <Paper className={classes.paper} elevation={0}>
-                <Typography component="h1" variant="h5">Employee Information</Typography>
-                <Button variant="contained" color="primary" onClick={handleClickOpen}>Add Employee</Button>
+                <Typography component="h1" variant="h5" className={classes.employee}>Employee Information</Typography>
+                <Button className={classes.addstaffbtn} variant="contained" color="primary" onClick={handleClickOpen}>Add Employee</Button>
             </Paper>
             <EmployeeTable/>
         </Container>
@@ -70,7 +70,9 @@ const EmployeePanel = () =>{
         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <Container component ="main" maxWidth="lg"> 
             <DialogTitle id="form-dialog-title">
-                    <Typography component="h1" variant="h5" className={classes.addstaff}>Add Employee </Typography>     
+                <div className={classes.division}>
+                    <Typography component="h1" variant="h5" className={classes.addstaff}>Add Employee </Typography>
+                </div>     
             </DialogTitle>
             <form onSubmit={handleSubmit}>
             <Grid container spacing={3}>
@@ -79,44 +81,44 @@ const EmployeePanel = () =>{
                 </Grid>
                 <Grid item xs={12}> 
                     <TextField  name="lastName" label="Last Name" 
-                         placeholder='Enter Last Name' required
+                        placeholder='Enter Last Name' required
                        // value={values.StaffId} 
-                       onChange={handleChange} 
+                        onChange={handleChange} 
                         fullWidth  variant="outlined" />
                 </Grid>
                 <Grid item xs={12}> 
                     <TextField  name="firstName" label="First Name" 
-                         placeholder='Enter First Name' required
+                        placeholder='Enter First Name' required
                        // value={values.StaffId} 
-                       onChange={handleChange} 
+                        onChange={handleChange} 
                         fullWidth  variant="outlined" />
                 </Grid>
                 <Grid item xs={12}> 
                     <TextField  name="middleName" label="Middle Name" 
-                         placeholder='Enter Middle Name'  required
+                        placeholder='Enter Middle Name'  required
                        // value={values.StaffId} 
-                       onChange={handleChange} 
+                        onChange={handleChange} 
                         fullWidth  variant="outlined" />
                 </Grid>
                 <Grid item xs={12}> 
                     <TextField  name="suffix" label="Suffix" 
-                         placeholder='Enter Suffix' 
+                        placeholder='Enter Suffix' 
                        // value={values.StaffId} 
-                       onChange={handleChange} 
+                        onChange={handleChange} 
                         fullWidth  variant="outlined" />
                 </Grid>
                 <Grid item xs={12}> 
                     <TextField  name="contactNumber" label="Contact Number" 
-                         placeholder='Enter Contact Number' required
+                        placeholder='Enter Contact Number' required
                        // value={values.StaffId} 
-                       onChange={handleChange} 
+                        onChange={handleChange} 
                         fullWidth  variant="outlined" />
                 </Grid>
                 <Grid item xs={12}> 
                     <TextField  name="email" label="Email" type="email"
-                         placeholder='Enter Email Address' required
+                        placeholder='Enter Email Address' required
                        // value={values.StaffId} 
-                       onChange={handleChange} 
+                        onChange={handleChange} 
                         fullWidth  variant="outlined" />
                 </Grid>
                 <Grid item xs={12}> 
@@ -240,6 +242,28 @@ const useStyles = makeStyles((theme) => ({
     googleButton: {
       marginBottom: theme.spacing(2),
     },
+
+    division: {
+        borderBottom: "3px solid red"
+    },
+
+    addstaff: {
+        textAlign: "center",
+        fontSize: "25px",
+        fontWeight: "bold",
+    },
+
+    addstaffbtn: {
+        marginTop: theme.spacing(3),
+        marginBottom: theme.spacing(2),
+        width: "20%",
+    },
+
+    employee: {
+        fontSize: "35px",
+        fontWeight: "bold",
+    }
+
   }));
 
 export default EmployeePanel

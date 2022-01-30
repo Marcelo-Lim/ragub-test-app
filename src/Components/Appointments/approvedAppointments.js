@@ -63,7 +63,8 @@ const ApprovedAppointments =() =>{
                 columns={columns}
                 components={{
                 Row: props => <CustomRow {...props} handleClickedOpen={handleClickedOpen}/>
-                }} 
+                }}
+
         />
 
 
