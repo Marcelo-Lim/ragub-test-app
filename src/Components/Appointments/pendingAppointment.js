@@ -109,7 +109,7 @@ const PendingAppointments =() =>{
     const handleSendEmail =()=>{
         // setValues();
         console.log(values)
-        // emailjs.send('service_vdtmbb6', 'template_mbwqyzp', values, 'user_Pja1vFlc7jtiv7rvHzl6w')
+        emailjs.send('service_vdtmbb6', 'template_mbwqyzp', values, 'user_Pja1vFlc7jtiv7rvHzl6w')
         dispatch(cancelAppointment(values._id,{...stat}))
         setOpenSendEmail(false)
     }

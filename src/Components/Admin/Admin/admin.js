@@ -9,9 +9,19 @@ const Admin =() =>{
     const classes = useStyles();
     const [user,setUser] = useState(JSON.parse(localStorage.getItem('profile')))
     const [values,setValues]=useState([])
+     //const [data,setData] =useState([])
+     const [filtered,setFilteredDatas]= useState([])
+    const [filteredtu,setFilteredDatatu]= useState([])
+    const [filteredDate,setFilteredDataDate]= useState([])
     const [data,setData] =useState([])
     const [open,setOpen]= useState(false)
-
+    const [drops,setDrops] = useState([])
+    const [filteredData,setFilteredData]=useState(data)
+    const dates = filteredDate.length
+    const pendingNumb = filteredData.length
+    const docs = drops.length
+    const  [client,setClient] = useState([])
+    const clientNo = client.length
     const handleOpen=(data)=>{
       setOpen(true)
       setValues(data)
@@ -21,13 +31,35 @@ const Admin =() =>{
     }
 
     const handleChange = (e) => setValues({ ...values, [e.target.name]: e.target.value });
-
+    useEffect(()=>{
+      fetch("https://sdmc-clinic.herokuapp.com/doctor/doctors/data")
+      .then(resp => resp.json())
+      .then(resp => setDrops(resp))
+  })
+  useEffect(()=>{
+    fetch("https://sdmc-clinic.herokuapp.com/user/info")
+    .then(resp => resp.json())
+    .then(resp => setClient(resp))
+})
     useEffect(function () {
       fetch("https://sdmc-clinic.herokuapp.com/appointment/appointmentsss")
       .then(resp=>resp.json())
       .then(resp=>setData(resp)) 
     })
+    useEffect(()=>{
+      setFilteredData(data.filter(d=>d.appointmentStatus === 'Pending' ));
+  },[data])
 
+// useEffect(()=>{
+//     setFilteredDatas(data.filter(d=>d.doctorsName === user?.result._id));
+// },[data])
+
+useEffect(()=>{
+    setFilteredDatatu(data.filter(d=>d.doctorsStatus === 'Approved'));
+},[data])
+useEffect(()=>{
+    setFilteredDataDate(filteredtu.filter(d=>d.dateAndTime.split("T")[0] === new Date().toISOString().split("T")[0]));
+},[filteredtu])
 
     return(
         <Container component="main" maxWidth="xl" >
@@ -36,25 +68,25 @@ const Admin =() =>{
                     <Grid item sm={3}>
                         <Paper className={classes.paper1}  elevation={4}>
                         <Typography component="h1" variant="h6">Appointments Today</Typography>
-                        <Typography component="h1" variant="h6"></Typography>
+                        <Typography component="h1" variant="h6">{dates}</Typography>
                         </Paper>
                     </Grid>
                     <Grid item sm={3}>
                         <Paper className={classes.paper1} elevation={4}>
                         <Typography component="h1" variant="h6">Pending Appointments</Typography>
-                        <Typography component="h1" variant="h6"></Typography>
+                        <Typography component="h1" variant="h6">{pendingNumb}</Typography>
                         </Paper>
                     </Grid>
                     <Grid item sm={3}>
                         <Paper className={classes.paper1} elevation={4}>
                         <Typography  component="h1" variant="h6">Available Doctors</Typography>
-                        <Typography component="h1" variant="h6"></Typography>
+                        <Typography component="h1" variant="h6">{docs}</Typography>
                         </Paper>
                     </Grid>
                     <Grid item sm={3}>
                         <Paper className={classes.paper1} elevation={4}>
                         <Typography component="h1" variant="h6">Number of Clients</Typography>
-                        <Typography component="h1" variant="h6"></Typography>
+                        <Typography component="h1" variant="h6">{clientNo}</Typography>
                         </Paper>
                     </Grid>
                 </Grid>
