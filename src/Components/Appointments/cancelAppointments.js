@@ -13,11 +13,12 @@ const initialState={
     dateAndTime:''
 }
 const CancelledAppointments =() =>{
-    const classes = useStyles()
+     const classes = useStyles()
     const [data,setData] = useState([{dateAndTime: new Date()}]);
     const [filteredData,setFilteredData]=useState(data)
     const [values,setValues]= useState(initialState);
     const [open,setOpen] = useState(false);
+	const [ds,setDis]= useState([])
     
     const columns=[ 
         {
@@ -45,12 +46,13 @@ const CancelledAppointments =() =>{
     useEffect(()=>{
         fetch("https://sdmc-clinic.herokuapp.com/appointment/appointmentsss")
         .then(resp => resp.json())
+		//.then(resp=> resp.)
         .then(resp => setData(resp))
     })
     useEffect(()=>{
         setFilteredData(data.filter(d=>d.appointmentStatus === 'Cancelled' ));
         
-    },[data])
+    },[data&& data.dateAndTime])
     const handleOpen =(data)=>{
         setOpen(true);
         setValues(data)

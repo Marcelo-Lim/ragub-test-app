@@ -10,12 +10,13 @@ import { Typography, makeStyles,Button,
     DialogTitle, TextField,FormControlLabel,MenuItem} from "@material-ui/core";
 
 const ApprovedAppointments =() =>{
-    const [data,setData] = useState([{
-		/* dateAndTime: new Date(),  */
-		firstName:''
+    const [data,setData] = useState([
+	{
+		dateAndTime: new Date()
 	}]); 
     const [open,setOpen] = useState(false);
-	const [filteredData,setFilteredData]=useState({dats: data.dateAndTime.toLocaleString()})
+	const [filteredData,setFilteredData]=useState(data)
+	const [fils,setFilteredDas]=useState({dara: moment(new Date(filteredData.dateAndTime)).format('D MMM YYYY')})
 	
     const classes = useStyles()
     const [values,setValues]= useState([]);
@@ -26,10 +27,10 @@ const ApprovedAppointments =() =>{
         },
       
         {
-            title: "Contact Number", field: "contactNumber"
+            title: "Contact Number", field: "contactNumber", type:'numeric'
         },
         {
-            title: "Date", field: "dateAndTime", 
+            title: "Date", field: "dara",  dateSetting: { locale: "en-GB" },
 		
         },
         {
@@ -49,11 +50,12 @@ const ApprovedAppointments =() =>{
     })
     useEffect(()=>{
         setFilteredData(data.filter(d=>d.appointmentStatus === 'Approved' ));
-        
+      
     },[data])
     const handleClickedOpen =(data)=>{
         setOpen(true);
-		console.log(data)
+		console.log(fils.dara)
+		console.log(data.dats)
         setValues(data)
 		
     }
